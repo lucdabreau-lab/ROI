@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value Realization Dashboard | Procore Analytics</title>
+    <title>Return on Investment Analysis | Procore Analytics</title>
     
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Fonts: Importing Inter as the best available fallback for Google Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        
         :root {
             --procore-orange: #D95D2A;
             --procore-black: #1A1A1A;
@@ -22,7 +26,8 @@
         }
 
         body { 
-            font-family: 'Inter', sans-serif; 
+            /* Prioritize Google Sans if available locally, otherwise use Inter */
+            font-family: 'Google Sans', 'Inter', sans-serif; 
             background-color: var(--procore-offwhite);
             color: var(--procore-black);
             -webkit-font-smoothing: antialiased;
@@ -83,17 +88,19 @@
 </head>
 <body class="min-h-screen">
 
+    <!-- Global Header -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 no-print">
         <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
             <div class="flex items-center gap-6">
+                <!-- Branding Container -->
                 <div class="flex items-center gap-4 bg-[#F9F7F5] p-2 px-3 rounded-2xl border border-[#EAE3D9]">
-                    <img src="https://www.jhlconstructors.com/wp-content/uploads/2022/09/Artboard-1.jpg" alt="JHL" class="h-10 w-auto object-contain rounded">
+                    <div class="h-10 w-24 bg-gray-200 rounded flex items-center justify-center text-xs font-bold text-gray-500">LOGO 1</div>
                     <div class="w-px h-8 bg-[#EAE3D9]"></div>
-                    <img src="https://1000logos.net/wp-content/uploads/2024/09/Procore-Emblem.png" alt="Procore" class="h-8 w-auto">
+                    <!-- Updated Procore Logo -->
+                    <img src="https://media.ffycdn.net/us/procore/etmeNi2XofqcS5LaePER.png?width={width}" alt="Procore" class="h-8 w-auto object-contain">
                 </div>
                 <div>
-                    <h1 class="font-black text-xl tracking-tight uppercase">Value Realization <span class="text-gray-400 font-light">Dashboard</span></h1>
-                    <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Strategic ROI Analysis</p>
+                    <h1 class="font-black text-xl tracking-tight uppercase">Return on Investment</h1>
                 </div>
             </div>
             
@@ -103,23 +110,26 @@
         </div>
     </header>
 
+    <!-- Navigation -->
     <nav id="tab-navigation" class="bg-white border-b border-gray-100 sticky top-24 z-40 no-print">
         <div class="max-w-7xl mx-auto px-6 flex gap-10 overflow-x-auto">
-            <button onclick="switchTab('safety')" id="tab-safety" class="h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Safety ROI</button>
+            <button onclick="switchTab('safety')" id="tab-safety" class="h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Incident Reduction</button>
             <button onclick="switchTab('rework')" id="tab-rework" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Rework Reduction</button>
-            <button onclick="switchTab('schedule')" id="tab-schedule" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Schedule & Overhead</button>
+            <button onclick="switchTab('schedule')" id="tab-schedule" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Schedule Improvement</button>
             <button onclick="switchTab('summary')" id="tab-summary" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Executive Summary</button>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
         
+        <!-- Tab 1: Safety ROI -->
         <section id="content-safety" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <aside class="lg:col-span-4 space-y-6">
+                <!-- Main Inputs -->
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
                     <div class="flex items-center gap-2 mb-8">
                         <div class="p-1.5 bg-[#EAE3D9] rounded-lg text-[#D95D2A]">
-                            <i data-lucide="sliders" size="18"></i>
+                            <i data-lucide="hard-hat" size="18"></i>
                         </div>
                         <h3 class="text-xs font-black uppercase tracking-widest text-slate-400">Safety Inputs</h3>
                     </div>
@@ -129,7 +139,7 @@
                             <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
                             <div class="relative rounded-2xl">
                                 <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
-                                <input id="input-annual-volume" type="number" step="1000000" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100000000">
+                                <input id="input-annual-volume" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                             </div>
                         </div>
 
@@ -159,6 +169,7 @@
                     </div>
                 </div>
 
+                <!-- Benchmarks -->
                 <div class="bg-[#1A1A1A] text-white p-8 rounded-3xl shadow-lg">
                     <div class="flex items-center gap-2 mb-8">
                         <i data-lucide="bar-chart-3" size="18" class="text-[#D95D2A]"></i>
@@ -183,91 +194,136 @@
                 </div>
             </aside>
 
-            <main class="lg:col-span-8 space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow text-center">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Target Annual Savings</p>
-                        <p id="display-annual-savings" class="text-3xl font-black text-emerald-500">$0</p>
+            <main class="lg:col-span-8 flex flex-col justify-between">
+                <div class="space-y-8">
+                    <!-- Summary Metrics Hero Card -->
+                    <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
+                        <div class="relative z-10">
+                            <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Target Annual Savings</p>
+                            <h2 id="display-annual-savings" class="text-6xl font-black mb-4">$0</h2>
+                            <p class="text-white/80 max-w-md text-sm leading-relaxed">
+                                Reducing incident frequency lowers direct insurance liabilities, administrative burden, and lost labor productivity.
+                            </p>
+                        </div>
+                        <!-- Changed watermark to Hard Hat for construction safety focus -->
+                        <i data-lucide="hard-hat" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow text-center">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Estimated Field FTEs</p>
-                        <p id="display-ftes" class="text-3xl font-black text-slate-800">0</p>
+
+                    <!-- Secondary Metrics Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Estimated Field FTEs</p>
+                            <p id="display-ftes" class="text-3xl font-black text-slate-800">0</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Predicted Recordables</p>
+                            <p id="display-incidents" class="text-3xl font-black text-slate-800">0</p>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow text-center">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Predicted Recordables</p>
-                        <p id="display-incidents" class="text-3xl font-black text-slate-800">0</p>
+
+                    <!-- Executive ROI Narrative -->
+                    <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                        <div class="p-8 md:p-12">
+                            <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Safety ROI Narrative</h3>
+                            <div class="space-y-12 relative">
+                                <div class="flex gap-8 items-start relative z-10">
+                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                    <div>
+                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Resource Allocation</h4>
+                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                            With an annual volume of <span id="narrative-volume" class="font-bold text-[#D95D2A]">$0</span> and labor allocation of <span id="narrative-labor-pct" class="font-bold text-[#D95D2A]">25%</span>, JHL manages approximately <span id="narrative-labor-cost" class="font-bold text-[#D95D2A]">$0</span> in field labor spend.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-8 items-start relative z-10">
+                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                    <div>
+                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Liability Exposure</h4>
+                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                            Accounting for <span id="narrative-sga-pct" class="font-bold text-[#1A1A1A]">7%</span> overhead and a TRIR of <span id="narrative-trir" class="font-bold text-[#1A1A1A]">2.3</span>, your sites carry an inherent liability of <span id="narrative-total-liability" class="font-black text-[#D95D2A]">$0</span> per year.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
+                                    <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="trending-up" size="32"></i></div>
+                                    <div>
+                                        <h4 class="text-2xl font-black text-emerald-900 leading-tight">Projected Annual Capture</h4>
+                                        <p class="text-emerald-700 mt-1">Driving a <span id="narrative-reduction-pct" class="font-black underline decoration-4 decoration-emerald-200">10%</span> incident reduction recovers:</p>
+                                        <div id="narrative-annual-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
+                                    </div>
+                                </div>
+                                <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
-                    <div class="p-8 md:p-12">
-                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12">Safety ROI Narrative</h3>
-                        <div class="space-y-12 relative">
-                            <div class="flex gap-8 items-start relative z-10">
-                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
-                                <div>
-                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Resource Allocation</h4>
-                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        With an annual volume of <span id="narrative-volume" class="font-bold text-[#D95D2A]">$0</span> and labor allocation of <span id="narrative-labor-pct" class="font-bold text-[#D95D2A]">25%</span>, JHL manages approximately <span id="narrative-labor-cost" class="font-bold text-[#D95D2A]">$0</span> in field labor spend.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex gap-8 items-start relative z-10">
-                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
-                                <div>
-                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Liability Exposure</h4>
-                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        Accounting for <span id="narrative-sga-pct" class="font-bold text-[#1A1A1A]">7%</span> overhead and a TRIR of <span id="narrative-trir" class="font-bold text-[#1A1A1A]">2.3</span>, your sites carry an inherent liability of <span id="narrative-total-liability" class="font-black text-[#D95D2A]">$0</span> per year.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
-                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="trending-up" size="32"></i></div>
-                                <div>
-                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">Projected Annual Capture</h4>
-                                    <p class="text-emerald-700 mt-1">Driving a <span id="narrative-reduction-pct" class="font-black underline decoration-4 decoration-emerald-200">10%</span> incident reduction recovers:</p>
-                                    <div id="narrative-annual-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
-                                </div>
-                            </div>
-                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
-                        </div>
-                    </div>
+                <!-- Footnotes for Tab 1 -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">Estimated FTEs:</span> Derived from field labor spend. 
+                        <a href="https://constructioncoverage.com/glossary/labor-burden" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Coverage Labor Burden</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">TRIR Benchmark:</span> Based on industry incidence rates. 
+                        <a href="https://www.bls.gov/iif/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Bureau of Labor Statistics (BLS)</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Cost per Recordable:</span> Average cost per medically consulted injury. 
+                        <a href="https://injuryfacts.nsc.org/work/costs/work-injury-costs/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Safety Council (NSC) Injury Facts</a>
+                    </p>
                 </div>
             </main>
         </section>
 
+        <!-- Tab 2: Rework Reduction -->
         <section id="content-rework" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
                     <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="wrench" class="w-5 h-5 text-[#D95D2A]"></i> Rework Variables</h2>
                     <div class="space-y-8">
+                        
+                        <!-- NEW Annual Volume Input for Tab 2 -->
                         <div>
-                            <div class="flex justify-between mb-2">
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-rework" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Total Rework % of Volume</label>
                                 <span id="val-rw-pct" class="text-sm font-bold text-[#D95D2A]">2.5%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">12% average. Ranges from 2% to 20%</p>
                             <input type="range" id="input-rw-pct" min="0.5" max="15" step="0.1" value="2.5">
                         </div>
                         
                         <div>
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable</label>
                                 <span id="val-rw-non" class="text-sm font-bold text-[#D95D2A]">70%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">70% average</p>
                             <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
                         </div>
 
                         <div class="pt-4 border-t">
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between mb-1">
                                 <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
                                 <span id="val-rw-red" class="text-sm font-bold text-emerald-600">5.0%</span>
                             </div>
-                            <input type="range" id="input-rw-red" min="1" max="25" step="0.5" value="5.0" class="slider-emerald">
+                            <p class="text-xs text-slate-400 mb-3">12% average</p>
+                            <input type="range" id="input-rw-red" min="1" max="25" step="1" value="5.0" class="slider-emerald">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="lg:col-span-8 space-y-8">
+                <!-- Hero Card: Annual Profit Recovery (Green) -->
                 <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
                     <div class="relative z-10">
                         <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Annual Profit Recovery</p>
@@ -290,10 +346,12 @@
                     </div>
                 </div>
 
+                <!-- Rework ROI Narrative -->
                 <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                     <div class="p-8 md:p-12">
                         <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Rework ROI Narrative</h3>
                         <div class="space-y-12 relative">
+                            <!-- Step 1 -->
                             <div class="flex gap-8 items-start relative z-10">
                                 <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
                                 <div>
@@ -303,6 +361,7 @@
                                     </p>
                                 </div>
                             </div>
+                            <!-- Step 2 -->
                             <div class="flex gap-8 items-start relative z-10">
                                 <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
                                 <div>
@@ -312,6 +371,7 @@
                                     </p>
                                 </div>
                             </div>
+                            <!-- Step 3 -->
                             <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
                                 <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="check-circle" size="32"></i></div>
                                 <div>
@@ -324,34 +384,59 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Footnotes for Tab 2 -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">Total Rework % of Volume:</span> Benchmarks for rework cost relative to Total Installed Cost. 
+                        <a href="https://becht.com/becht-blog/entry/measuring-construction-rework-delays-in-sustaining-capital-projects/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Becht Engineering Analysis</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Estimated Nonrecoverable:</span> Portion of rework costs not recoverable via insurance/back-charges. 
+                        <a href="https://www.procore.com/ebooks/global-state-of-preconstruction" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Procore Global State of Preconstruction</a>
+                    </p>
+                </div>
             </div>
         </section>
 
+        <!-- Tab 3: Schedule & Overhead (NEW REPLACEMENT) -->
         <section id="content-schedule" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-[#2563EB]"></i> Schedule Variables</h2>
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-emerald-600"></i> Schedule Variables</h2>
                     <div class="space-y-8">
+                        
+                        <!-- NEW Annual Volume Input for Tab 3 -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <!-- Styled with Emerald/Green for Tab 3 consistency -->
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-600 font-bold text-lg">$</span>
+                                <input id="input-annual-volume-schedule" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-emerald-600 outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                            </div>
+                        </div>
+
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
-                                <span id="val-gc-pct" class="text-sm font-bold text-[#2563EB]">8%</span>
+                                <span id="val-gc-pct" class="text-sm font-bold text-emerald-600">8%</span>
                             </div>
-                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-blue">
+                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-emerald">
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
-                                <span id="val-duration" class="text-sm font-bold text-[#2563EB]">12</span>
+                                <span id="val-duration" class="text-sm font-bold text-emerald-600">12</span>
                             </div>
-                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-blue">
+                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-emerald">
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
-                                <span id="val-slippage" class="text-sm font-bold text-[#2563EB]">15%</span>
+                                <span id="val-slippage" class="text-sm font-bold text-emerald-600">15%</span>
                             </div>
-                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-blue">
+                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-emerald">
                         </div>
                         <div class="pt-4 border-t">
                             <div class="flex justify-between mb-2">
@@ -365,11 +450,11 @@
             </div>
             
             <div class="lg:col-span-8 space-y-6">
-                <div class="bg-[#2563EB] rounded-[2.5rem] p-10 text-white relative overflow-hidden">
+                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
                     <div class="relative z-10">
-                        <p class="text-blue-100 font-bold uppercase tracking-widest text-xs mb-2">Schedule & Overhead Savings</p>
+                        <p class="text-emerald-100 font-bold uppercase tracking-widest text-xs mb-2">Schedule & Overhead Savings</p>
                         <h2 id="display-sched-savings" class="text-6xl font-black mb-4">$0</h2>
-                        <p class="text-blue-100/80 max-w-md text-sm leading-relaxed">
+                        <p class="text-emerald-100/80 max-w-md text-sm leading-relaxed">
                             Proactively mitigating schedule delays reduces the non-reimbursable burn of General Conditions and limits exposure to liquidated damages.
                         </p>
                     </div>
@@ -388,10 +473,84 @@
                         <p class="text-xs text-slate-400 mt-2">Estimated cost of slip + claim risk</p>
                     </div>
                 </div>
+
+                <!-- Schedule ROI Narrative (NEW ADDITION) -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Schedule ROI Narrative</h3>
+                        <div class="space-y-12 relative">
+                            <!-- Step 1 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Burn Rate</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        With General Conditions set at <span id="narrative-sched-gc-pct" class="font-bold text-emerald-600">8%</span> of your <span id="narrative-sched-vol" class="font-bold text-emerald-600">$100M</span> volume, your project sites burn <span id="narrative-sched-daily-burn" class="font-bold text-emerald-600">$22k</span> every single calendar day.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Overrun Risk</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-emerald-600">$1.2M</span> in non-recoverable overhead.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
+                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="hourglass" size="32"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">Efficiency Dividend</h4>
+                                    <p class="text-emerald-700 mt-1">Improving schedule efficiency by <span id="narrative-sched-red" class="font-black underline decoration-4 decoration-emerald-200">10%</span> recaptures:</p>
+                                    <div id="narrative-sched-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
+                                </div>
+                            </div>
+                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footnotes for Tab 3 -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">Average settled claim of 2%:</span> Benchmark for claim value relative to project volume. 
+                        <a href="https://www.foundamental.com/perspectives/disputes-in-construction" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Foundamental Perspectives</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Frequency of claims:</span> Analysis of claim occurrence rates. 
+                        <a href="https://www.nationalacademies.org/read/11846/chapter/9" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Academies Report</a>
+                    </p>
+                </div>
+
             </div>
         </section>
 
+        <!-- Tab 4: Summary -->
         <section id="content-summary" class="hidden space-y-8">
+            
+            <!-- Value Stream Toggles -->
+            <div class="flex flex-wrap justify-center gap-8 mb-4 bg-white p-4 rounded-3xl border border-slate-200 card-shadow w-fit mx-auto no-print">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-safety" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#D95D2A]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Incident Reduction</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-rework" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#10b981]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Rework Reduction</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-schedule" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563EB]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Schedule Improvement</span>
+                </label>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase mb-2">Total Year 1 Realization</p>
@@ -434,16 +593,60 @@
             if (tab === 'summary') renderChart();
         }
 
+        // Modified function to sync volume inputs across all tabs
+        function formatVolumeInput(input) {
+            // Remove non-digit chars
+            let rawValue = input.value.replace(/\D/g, '');
+            if (rawValue === '') {
+                calculate();
+                return;
+            }
+            // Format with commas
+            const formatted = Number(rawValue).toLocaleString();
+            
+            // Update all volume inputs to stay in sync
+            const volInputs = [
+                document.getElementById('input-annual-volume'),
+                document.getElementById('input-annual-volume-rework'),
+                document.getElementById('input-annual-volume-schedule')
+            ];
+            
+            volInputs.forEach(el => {
+                if (el && el !== input) {
+                    el.value = formatted;
+                }
+            });
+
+            input.value = formatted;
+            calculate();
+        }
+
         function calculate() {
-            // Global driver
-            const vol = parseFloat(document.getElementById('input-annual-volume').value) || 0;
+            // Helper to safely get value from an input ID, defaulting to 0 if missing or empty
+            const getVal = (id) => {
+                const el = document.getElementById(id);
+                return el ? parseFloat(el.value) : 0;
+            };
+
+            // Safe volume retrieval (handles commas and missing elements)
+            let vol = 0;
+            const volInput1 = document.getElementById('input-annual-volume');
+            if (volInput1) {
+                vol = parseFloat(volInput1.value.replace(/,/g, '')) || 0;
+            } else {
+                // Fallback to others if Tab 1 input missing
+                const volInput2 = document.getElementById('input-annual-volume-rework');
+                const volInput3 = document.getElementById('input-annual-volume-schedule');
+                if (volInput2) vol = parseFloat(volInput2.value.replace(/,/g, '')) || 0;
+                else if (volInput3) vol = parseFloat(volInput3.value.replace(/,/g, '')) || 0;
+            }
 
             // --- Safety Logic ---
-            const sgaPct = parseFloat(document.getElementById('input-sga-pct').value);
-            const lPct = parseFloat(document.getElementById('input-labor-pct').value);
-            const safetyRed = parseFloat(document.getElementById('input-reduction-pct').value);
-            const trir = parseFloat(document.getElementById('input-trir-value').value);
-            const costPerRecordable = parseFloat(document.getElementById('input-cost-recordable').value);
+            const sgaPct = getVal('input-sga-pct');
+            const lPct = getVal('input-labor-pct');
+            const safetyRed = getVal('input-reduction-pct');
+            const trir = getVal('input-trir-value');
+            const costPerRecordable = getVal('input-cost-recordable');
             
             const totalLaborCost = vol * lPct;
             const fieldLaborSpend = totalLaborCost * (1 - sgaPct);
@@ -453,58 +656,58 @@
             state.safety = safetyLiability * safetyRed;
 
             // UI Updates - Safety
-            document.getElementById('label-sga-pct').innerText = Math.round(sgaPct * 100) + '%';
-            document.getElementById('label-labor-pct').innerText = Math.round(lPct * 100) + '%';
-            document.getElementById('label-reduction-pct').innerText = Math.round(safetyRed * 100) + '%';
-            document.getElementById('label-trir-value').innerText = trir.toFixed(1);
-            document.getElementById('label-cost-recordable').innerText = toShort(costPerRecordable);
+            if (document.getElementById('label-sga-pct')) document.getElementById('label-sga-pct').innerText = Math.round(sgaPct * 100) + '%';
+            if (document.getElementById('label-labor-pct')) document.getElementById('label-labor-pct').innerText = Math.round(lPct * 100) + '%';
+            if (document.getElementById('label-reduction-pct')) document.getElementById('label-reduction-pct').innerText = Math.round(safetyRed * 100) + '%';
+            if (document.getElementById('label-trir-value')) document.getElementById('label-trir-value').innerText = trir.toFixed(1);
+            if (document.getElementById('label-cost-recordable')) document.getElementById('label-cost-recordable').innerText = toShort(costPerRecordable);
             
-            document.getElementById('display-annual-savings').innerText = toCurrency(state.safety);
-            document.getElementById('display-ftes').innerText = Math.round(ftes).toLocaleString();
-            document.getElementById('display-incidents').innerText = incidents.toFixed(1);
+            if (document.getElementById('display-annual-savings')) document.getElementById('display-annual-savings').innerText = toCurrency(state.safety);
+            if (document.getElementById('display-ftes')) document.getElementById('display-ftes').innerText = Math.round(ftes).toLocaleString();
+            if (document.getElementById('display-incidents')) document.getElementById('display-incidents').innerText = incidents.toFixed(1);
             
-            document.getElementById('narrative-volume').innerText = toCurrency(vol);
-            document.getElementById('narrative-labor-pct').innerText = Math.round(lPct * 100) + '%';
-            document.getElementById('narrative-labor-cost').innerText = toCurrency(totalLaborCost);
-            document.getElementById('narrative-sga-pct').innerText = Math.round(sgaPct * 100) + '%';
-            document.getElementById('narrative-trir').innerText = trir.toFixed(1);
-            document.getElementById('narrative-total-liability').innerText = toCurrency(safetyLiability);
-            document.getElementById('narrative-reduction-pct').innerText = Math.round(safetyRed * 100) + '%';
-            document.getElementById('narrative-annual-savings').innerText = toCurrency(state.safety);
+            if (document.getElementById('narrative-volume')) document.getElementById('narrative-volume').innerText = toCurrency(vol);
+            if (document.getElementById('narrative-labor-pct')) document.getElementById('narrative-labor-pct').innerText = Math.round(lPct * 100) + '%';
+            if (document.getElementById('narrative-labor-cost')) document.getElementById('narrative-labor-cost').innerText = toCurrency(totalLaborCost);
+            if (document.getElementById('narrative-sga-pct')) document.getElementById('narrative-sga-pct').innerText = Math.round(sgaPct * 100) + '%';
+            if (document.getElementById('narrative-trir')) document.getElementById('narrative-trir').innerText = trir.toFixed(1);
+            if (document.getElementById('narrative-total-liability')) document.getElementById('narrative-total-liability').innerText = toCurrency(safetyLiability);
+            if (document.getElementById('narrative-reduction-pct')) document.getElementById('narrative-reduction-pct').innerText = Math.round(safetyRed * 100) + '%';
+            if (document.getElementById('narrative-annual-savings')) document.getElementById('narrative-annual-savings').innerText = toCurrency(state.safety);
 
             // --- Rework Logic ---
-            const rwPct = parseFloat(document.getElementById('input-rw-pct').value) / 100;
-            const rwNon = parseFloat(document.getElementById('input-rw-non').value) / 100;
-            const rwRed = parseFloat(document.getElementById('input-rw-red').value) / 100;
+            const rwPct = getVal('input-rw-pct') / 100;
+            const rwNon = getVal('input-rw-non') / 100;
+            const rwRed = getVal('input-rw-red') / 100;
             
             const totalReworkExposure = (vol * rwPct) * rwNon;
             state.rework = totalReworkExposure * rwRed;
 
-            document.getElementById('val-rw-pct').innerText = (rwPct * 100).toFixed(1) + '%';
-            document.getElementById('val-rw-non').innerText = Math.round(rwNon * 100) + '%';
-            document.getElementById('val-rw-red').innerText = (rwRed * 100).toFixed(1) + '%';
+            if (document.getElementById('val-rw-pct')) document.getElementById('val-rw-pct').innerText = (rwPct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-rw-non')) document.getElementById('val-rw-non').innerText = Math.round(rwNon * 100) + '%';
+            if (document.getElementById('val-rw-red')) document.getElementById('val-rw-red').innerText = (rwRed * 100).toFixed(1) + '%';
             
-            document.getElementById('display-rw-savings').innerText = toCurrency(state.rework);
-            document.getElementById('display-rw-exposure').innerText = toCurrency(totalReworkExposure);
-            document.getElementById('display-rw-profit').innerText = '+' + ((state.rework / vol) * 100).toFixed(2) + '%';
+            if (document.getElementById('display-rw-savings')) document.getElementById('display-rw-savings').innerText = toCurrency(state.rework);
+            if (document.getElementById('display-rw-exposure')) document.getElementById('display-rw-exposure').innerText = toCurrency(totalReworkExposure);
+            if (document.getElementById('display-rw-profit')) document.getElementById('display-rw-profit').innerText = '+' + (vol > 0 ? ((state.rework / vol) * 100).toFixed(2) : '0.00') + '%';
 
-            document.getElementById('narrative-rw-vol').innerText = toCurrency(vol);
-            document.getElementById('narrative-rw-pct').innerText = (rwPct * 100).toFixed(1) + '%';
-            document.getElementById('narrative-rw-total').innerText = toCurrency(vol * rwPct);
-            document.getElementById('narrative-rw-non').innerText = Math.round(rwNon * 100) + '%';
-            document.getElementById('narrative-rw-exposure').innerText = toCurrency(totalReworkExposure);
-            document.getElementById('narrative-rw-red').innerText = (rwRed * 100).toFixed(1) + '%';
-            document.getElementById('narrative-rw-savings').innerText = toCurrency(state.rework);
+            if (document.getElementById('narrative-rw-vol')) document.getElementById('narrative-rw-vol').innerText = toCurrency(vol);
+            if (document.getElementById('narrative-rw-pct')) document.getElementById('narrative-rw-pct').innerText = (rwPct * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-rw-total')) document.getElementById('narrative-rw-total').innerText = toCurrency(vol * rwPct);
+            if (document.getElementById('narrative-rw-non')) document.getElementById('narrative-rw-non').innerText = Math.round(rwNon * 100) + '%';
+            if (document.getElementById('narrative-rw-exposure')) document.getElementById('narrative-rw-exposure').innerText = toCurrency(totalReworkExposure);
+            if (document.getElementById('narrative-rw-red')) document.getElementById('narrative-rw-red').innerText = (rwRed * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-rw-savings')) document.getElementById('narrative-rw-savings').innerText = toCurrency(state.rework);
 
-            // --- Schedule Logic (NEW) ---
-            const gcPct = parseFloat(document.getElementById('input-gc-pct').value) / 100;
-            const durationMo = parseFloat(document.getElementById('input-duration').value);
-            const slippagePct = parseFloat(document.getElementById('input-slippage').value) / 100;
-            const schedRed = parseFloat(document.getElementById('input-sched-red').value) / 100;
+            // --- Schedule Logic ---
+            const gcPct = getVal('input-gc-pct') / 100;
+            const durationMo = getVal('input-duration');
+            const slippagePct = getVal('input-slippage') / 100;
+            const schedRed = getVal('input-sched-red') / 100;
 
             const totalGcCost = vol * gcPct;
             const durationDays = durationMo * 30; // Approx
-            const dailyBurn = totalGcCost / durationDays;
+            const dailyBurn = durationDays > 0 ? totalGcCost / durationDays : 0;
             
             const overrunDays = durationDays * slippagePct;
             const overrunCost = overrunDays * dailyBurn;
@@ -516,33 +719,76 @@
             state.schedule = totalScheduleExposure * schedRed;
 
             // Schedule UI
-            document.getElementById('val-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
-            document.getElementById('val-duration').innerText = durationMo;
-            document.getElementById('val-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
-            document.getElementById('val-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
+            if (document.getElementById('val-gc-pct')) document.getElementById('val-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-duration')) document.getElementById('val-duration').innerText = durationMo;
+            if (document.getElementById('val-slippage')) document.getElementById('val-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-sched-red')) document.getElementById('val-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
             
-            document.getElementById('display-sched-savings').innerText = toCurrency(state.schedule);
-            document.getElementById('display-burn-rate').innerText = toCurrency(dailyBurn);
-            document.getElementById('display-overrun-cost').innerText = toCurrency(totalScheduleExposure);
+            if (document.getElementById('display-sched-savings')) document.getElementById('display-sched-savings').innerText = toCurrency(state.schedule);
+            if (document.getElementById('display-burn-rate')) document.getElementById('display-burn-rate').innerText = toCurrency(dailyBurn);
+            if (document.getElementById('display-overrun-cost')) document.getElementById('display-overrun-cost').innerText = toCurrency(totalScheduleExposure);
+
+            // Narrative Update for Schedule
+            if (document.getElementById('narrative-sched-vol')) document.getElementById('narrative-sched-vol').innerText = toShort(vol);
+            if (document.getElementById('narrative-sched-gc-pct')) document.getElementById('narrative-sched-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-sched-daily-burn')) document.getElementById('narrative-sched-daily-burn').innerText = toCurrency(dailyBurn);
+            if (document.getElementById('narrative-sched-duration')) document.getElementById('narrative-sched-duration').innerText = durationMo;
+            if (document.getElementById('narrative-sched-slippage')) document.getElementById('narrative-sched-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost);
+            if (document.getElementById('narrative-sched-red')) document.getElementById('narrative-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-sched-savings')) document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
+
 
             // --- Global Summary ---
-            const y1 = state.safety + state.rework + state.schedule;
-            document.getElementById('summary-total-savings').innerText = toCurrency(y1);
-            document.getElementById('summary-total-3yr').innerText = toCurrency(y1 * 3);
+            // Check toggles (if they exist, default to true)
+            const sTog = document.getElementById('toggle-safety');
+            const rTog = document.getElementById('toggle-rework');
+            const scTog = document.getElementById('toggle-schedule');
+            
+            const sOn = sTog ? sTog.checked : true;
+            const rOn = rTog ? rTog.checked : true;
+            const scOn = scTog ? scTog.checked : true;
+
+            const y1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0);
+            
+            if (document.getElementById('summary-total-savings')) document.getElementById('summary-total-savings').innerText = toCurrency(y1);
+            if (document.getElementById('summary-total-3yr')) document.getElementById('summary-total-3yr').innerText = toCurrency(y1 * 3);
         }
 
         function renderChart() {
-            const ctx = document.getElementById('roiChart').getContext('2d');
+            const canvas = document.getElementById('roiChart');
+            if (!canvas) return; // Guard clause
+            
+            const ctx = canvas.getContext('2d');
             if (roiChart) roiChart.destroy();
+
+            // Check toggles
+            const sTog = document.getElementById('toggle-safety');
+            const rTog = document.getElementById('toggle-rework');
+            const scTog = document.getElementById('toggle-schedule');
+            
+            const sOn = sTog ? sTog.checked : true;
+            const rOn = rTog ? rTog.checked : true;
+            const scOn = scTog ? scTog.checked : true;
+
+            // Prepare datasets conditionally
+            const datasets = [];
+            
+            if (sOn) {
+                datasets.push({ label: 'Incident Reduction', data: [state.safety, state.safety * 1.1, state.safety * 1.25], backgroundColor: '#D95D2A', borderRadius: 6 });
+            }
+            if (rOn) {
+                datasets.push({ label: 'Rework Reduction', data: [state.rework, state.rework * 1.1, state.rework * 1.25], backgroundColor: '#10b981', borderRadius: 6 });
+            }
+            if (scOn) {
+                datasets.push({ label: 'Schedule Improvement', data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], backgroundColor: '#2563EB', borderRadius: 6 });
+            }
+
             roiChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Year 1', 'Year 2', 'Year 3'],
-                    datasets: [
-                        { label: 'Safety ROI', data: [state.safety, state.safety * 1.1, state.safety * 1.25], backgroundColor: '#D95D2A', borderRadius: 6 },
-                        { label: 'Rework Savings', data: [state.rework, state.rework * 1.1, state.rework * 1.25], backgroundColor: '#10b981', borderRadius: 6 },
-                        { label: 'Schedule Savings', data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], backgroundColor: '#2563EB', borderRadius: 6 }
-                    ]
+                    datasets: datasets
                 },
                 options: { 
                     responsive: true, 

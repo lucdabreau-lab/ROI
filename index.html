@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Value Realization Dashboard | Procore Analytics</title>
     
-    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Fonts -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         
         :root {
             --procore-orange: #D95D2A;
@@ -85,15 +83,13 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- Global Header -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 no-print">
         <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
             <div class="flex items-center gap-6">
-                <!-- Branding Container -->
                 <div class="flex items-center gap-4 bg-[#F9F7F5] p-2 px-3 rounded-2xl border border-[#EAE3D9]">
-                    <div class="h-10 w-24 bg-gray-200 rounded flex items-center justify-center text-xs font-bold text-gray-500">LOGO 1</div>
+                    <img src="https://www.jhlconstructors.com/wp-content/uploads/2022/09/Artboard-1.jpg" alt="JHL" class="h-10 w-auto object-contain rounded">
                     <div class="w-px h-8 bg-[#EAE3D9]"></div>
-                    <div class="h-8 w-8 bg-[#D95D2A] rounded flex items-center justify-center text-white font-bold text-xs">P</div>
+                    <img src="https://1000logos.net/wp-content/uploads/2024/09/Procore-Emblem.png" alt="Procore" class="h-8 w-auto">
                 </div>
                 <div>
                     <h1 class="font-black text-xl tracking-tight uppercase">Value Realization <span class="text-gray-400 font-light">Dashboard</span></h1>
@@ -107,7 +103,6 @@
         </div>
     </header>
 
-    <!-- Navigation -->
     <nav id="tab-navigation" class="bg-white border-b border-gray-100 sticky top-24 z-40 no-print">
         <div class="max-w-7xl mx-auto px-6 flex gap-10 overflow-x-auto">
             <button onclick="switchTab('safety')" id="tab-safety" class="h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Safety ROI</button>
@@ -119,10 +114,8 @@
 
     <main class="max-w-7xl mx-auto px-6 py-10">
         
-        <!-- Tab 1: Safety ROI -->
         <section id="content-safety" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <aside class="lg:col-span-4 space-y-6">
-                <!-- Main Inputs -->
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
                     <div class="flex items-center gap-2 mb-8">
                         <div class="p-1.5 bg-[#EAE3D9] rounded-lg text-[#D95D2A]">
@@ -166,7 +159,6 @@
                     </div>
                 </div>
 
-                <!-- Benchmarks -->
                 <div class="bg-[#1A1A1A] text-white p-8 rounded-3xl shadow-lg">
                     <div class="flex items-center gap-2 mb-8">
                         <i data-lucide="bar-chart-3" size="18" class="text-[#D95D2A]"></i>
@@ -192,7 +184,6 @@
             </aside>
 
             <main class="lg:col-span-8 space-y-8">
-                <!-- Summary Metrics -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow text-center">
                         <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Target Annual Savings</p>
@@ -208,7 +199,6 @@
                     </div>
                 </div>
 
-                <!-- Executive ROI Narrative -->
                 <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                     <div class="p-8 md:p-12">
                         <h3 class="text-2xl font-black text-[#1A1A1A] mb-12">Safety ROI Narrative</h3>
@@ -246,7 +236,6 @@
             </main>
         </section>
 
-        <!-- Tab 2: Rework Reduction -->
         <section id="content-rework" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
@@ -279,7 +268,6 @@
                 </div>
             </div>
             <div class="lg:col-span-8 space-y-8">
-                <!-- Hero Card: Annual Profit Recovery (Green) -->
                 <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
                     <div class="relative z-10">
                         <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Annual Profit Recovery</p>
@@ -302,12 +290,10 @@
                     </div>
                 </div>
 
-                <!-- Rework ROI Narrative -->
                 <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                     <div class="p-8 md:p-12">
                         <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Rework ROI Narrative</h3>
                         <div class="space-y-12 relative">
-                            <!-- Step 1 -->
                             <div class="flex gap-8 items-start relative z-10">
                                 <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
                                 <div>
@@ -317,7 +303,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- Step 2 -->
                             <div class="flex gap-8 items-start relative z-10">
                                 <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
                                 <div>
@@ -327,7 +312,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- Step 3 -->
                             <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
                                 <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="check-circle" size="32"></i></div>
                                 <div>
@@ -343,32 +327,31 @@
             </div>
         </section>
 
-        <!-- Tab 3: Schedule & Overhead (NEW REPLACEMENT) -->
         <section id="content-schedule" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-emerald-600"></i> Schedule Variables</h2>
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-[#2563EB]"></i> Schedule Variables</h2>
                     <div class="space-y-8">
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
-                                <span id="val-gc-pct" class="text-sm font-bold text-emerald-600">8%</span>
+                                <span id="val-gc-pct" class="text-sm font-bold text-[#2563EB]">8%</span>
                             </div>
-                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-emerald">
+                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-blue">
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
-                                <span id="val-duration" class="text-sm font-bold text-emerald-600">12</span>
+                                <span id="val-duration" class="text-sm font-bold text-[#2563EB]">12</span>
                             </div>
-                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-emerald">
+                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-blue">
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
                                 <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
-                                <span id="val-slippage" class="text-sm font-bold text-emerald-600">15%</span>
+                                <span id="val-slippage" class="text-sm font-bold text-[#2563EB]">15%</span>
                             </div>
-                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-emerald">
+                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-blue">
                         </div>
                         <div class="pt-4 border-t">
                             <div class="flex justify-between mb-2">
@@ -382,11 +365,11 @@
             </div>
             
             <div class="lg:col-span-8 space-y-6">
-                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
+                <div class="bg-[#2563EB] rounded-[2.5rem] p-10 text-white relative overflow-hidden">
                     <div class="relative z-10">
-                        <p class="text-emerald-100 font-bold uppercase tracking-widest text-xs mb-2">Schedule & Overhead Savings</p>
+                        <p class="text-blue-100 font-bold uppercase tracking-widest text-xs mb-2">Schedule & Overhead Savings</p>
                         <h2 id="display-sched-savings" class="text-6xl font-black mb-4">$0</h2>
-                        <p class="text-emerald-100/80 max-w-md text-sm leading-relaxed">
+                        <p class="text-blue-100/80 max-w-md text-sm leading-relaxed">
                             Proactively mitigating schedule delays reduces the non-reimbursable burn of General Conditions and limits exposure to liquidated damages.
                         </p>
                     </div>
@@ -405,50 +388,9 @@
                         <p class="text-xs text-slate-400 mt-2">Estimated cost of slip + claim risk</p>
                     </div>
                 </div>
-
-                <!-- Schedule ROI Narrative (NEW ADDITION) -->
-                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
-                    <div class="p-8 md:p-12">
-                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Schedule ROI Narrative</h3>
-                        <div class="space-y-12 relative">
-                            <!-- Step 1 -->
-                            <div class="flex gap-8 items-start relative z-10">
-                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
-                                <div>
-                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Burn Rate</h4>
-                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        With General Conditions set at <span id="narrative-sched-gc-pct" class="font-bold text-emerald-600">8%</span> of your <span id="narrative-sched-vol" class="font-bold text-emerald-600">$100M</span> volume, your project sites burn <span id="narrative-sched-daily-burn" class="font-bold text-emerald-600">$22k</span> every single calendar day.
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Step 2 -->
-                            <div class="flex gap-8 items-start relative z-10">
-                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
-                                <div>
-                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Overrun Risk</h4>
-                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-emerald-600">$1.2M</span> in non-recoverable overhead.
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Step 3 -->
-                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
-                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="hourglass" size="32"></i></div>
-                                <div>
-                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">Efficiency Dividend</h4>
-                                    <p class="text-emerald-700 mt-1">Improving schedule efficiency by <span id="narrative-sched-red" class="font-black underline decoration-4 decoration-emerald-200">10%</span> recaptures:</p>
-                                    <div id="narrative-sched-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
-                                </div>
-                            </div>
-                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- Tab 4: Summary -->
         <section id="content-summary" class="hidden space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
@@ -582,17 +524,6 @@
             document.getElementById('display-sched-savings').innerText = toCurrency(state.schedule);
             document.getElementById('display-burn-rate').innerText = toCurrency(dailyBurn);
             document.getElementById('display-overrun-cost').innerText = toCurrency(totalScheduleExposure);
-
-            // Narrative Update for Schedule (NEW)
-            document.getElementById('narrative-sched-vol').innerText = toShort(vol);
-            document.getElementById('narrative-sched-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
-            document.getElementById('narrative-sched-daily-burn').innerText = toCurrency(dailyBurn);
-            document.getElementById('narrative-sched-duration').innerText = durationMo;
-            document.getElementById('narrative-sched-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
-            document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost);
-            document.getElementById('narrative-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
-            document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
-
 
             // --- Global Summary ---
             const y1 = state.safety + state.rework + state.schedule;

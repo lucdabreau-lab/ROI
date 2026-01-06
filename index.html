@@ -541,17 +541,18 @@
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-rework" class="sr-only peer" checked onchange="calculate(); renderChart();">
-                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#10b981]"></div>
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1A1A1A]"></div>
                     <span class="ms-3 text-sm font-bold text-gray-700">Rework Reduction</span>
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-schedule" class="sr-only peer" checked onchange="calculate(); renderChart();">
-                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563EB]"></div>
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#EAE3D9]"></div>
                     <span class="ms-3 text-sm font-bold text-gray-700">Schedule Improvement</span>
                 </label>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Changed grid from cols-3 to cols-2 since card was removed -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase mb-2">Total Year 1 Realization</p>
                     <h3 id="summary-total-savings" class="text-4xl font-black text-[#D95D2A]">$0</h3>
@@ -559,12 +560,6 @@
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase mb-2">3-Year Cumulative Value</p>
                     <h3 id="summary-total-3yr" class="text-4xl font-black text-emerald-600">$0</h3>
-                </div>
-                <div class="bg-[#1A1A1A] p-8 rounded-3xl shadow-lg flex items-center justify-center">
-                    <div class="text-center">
-                        <p class="text-xs font-bold text-[#D95D2A] uppercase mb-1">Strategic Impact</p>
-                        <p class="text-white font-bold text-sm">Operationally Optimized</p>
-                    </div>
                 </div>
             </div>
             <div class="bg-white p-10 rounded-3xl border border-slate-200 card-shadow">
@@ -775,13 +770,16 @@
             const datasets = [];
             
             if (sOn) {
+                // Safety: Orange
                 datasets.push({ label: 'Incident Reduction', data: [state.safety, state.safety * 1.1, state.safety * 1.25], backgroundColor: '#D95D2A', borderRadius: 6 });
             }
             if (rOn) {
-                datasets.push({ label: 'Rework Reduction', data: [state.rework, state.rework * 1.1, state.rework * 1.25], backgroundColor: '#10b981', borderRadius: 6 });
+                // Rework: Black (Changed from Green)
+                datasets.push({ label: 'Rework Reduction', data: [state.rework, state.rework * 1.1, state.rework * 1.25], backgroundColor: '#1A1A1A', borderRadius: 6 });
             }
             if (scOn) {
-                datasets.push({ label: 'Schedule Improvement', data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], backgroundColor: '#2563EB', borderRadius: 6 });
+                // Schedule: Tan (Changed from Blue)
+                datasets.push({ label: 'Schedule Improvement', data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], backgroundColor: '#EAE3D9', borderRadius: 6 });
             }
 
             roiChart = new Chart(ctx, {

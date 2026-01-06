@@ -83,6 +83,8 @@
             .card-shadow { box-shadow: none; border: 1px solid #e5e7eb; }
             section { display: block !important; page-break-after: always; }
             #tab-navigation { display: none !important; }
+            /* Ensure inputs look like text when printing */
+            #company-name { border: none; background: transparent; padding: 0; }
         }
     </style>
 </head>
@@ -94,13 +96,31 @@
             <div class="flex items-center gap-6">
                 <!-- Branding Container -->
                 <div class="flex items-center gap-4 bg-[#F9F7F5] p-2 px-3 rounded-2xl border border-[#EAE3D9]">
-                    <div class="h-10 w-24 bg-gray-200 rounded flex items-center justify-center text-xs font-bold text-gray-500">LOGO 1</div>
+                    <!-- Company Logo Input (URL based) -->
+                    <div class="group relative h-10 w-24 bg-gray-200 rounded flex items-center justify-center overflow-hidden" title="Paste URL to company logo">
+                        <!-- Image Display Layer -->
+                        <img id="company-logo-img" src="" class="absolute inset-0 h-full w-full object-contain hidden z-0">
+                        
+                        <!-- Input Layer -->
+                        <input type="text" 
+                               id="company-logo-input"
+                               class="relative z-10 w-full h-full bg-transparent text-[10px] font-bold text-gray-500 placeholder-gray-500 text-center focus:outline-none focus:bg-white/90 transition-all opacity-100" 
+                               placeholder="LOGO LINK" 
+                               oninput="updateLogoFromUrl(this)">
+                    </div>
+
                     <div class="w-px h-8 bg-[#EAE3D9]"></div>
                     <!-- Updated Procore Logo -->
                     <img src="https://media.ffycdn.net/us/procore/etmeNi2XofqcS5LaePER.png?width={width}" alt="Procore" class="h-8 w-auto object-contain">
                 </div>
-                <div>
-                    <h1 class="font-black text-xl tracking-tight uppercase">Return on Investment</h1>
+                <div class="flex flex-col justify-center">
+                    <h1 class="font-black text-xl tracking-tight uppercase leading-none mb-1">Return on Investment</h1>
+                    <!-- Company Name Input -->
+                    <input type="text" id="company-name" 
+                           class="bg-transparent text-xs font-bold text-slate-500 placeholder-slate-400 focus:outline-none focus:border-b focus:border-procore-orange transition-colors w-64 uppercase tracking-widest" 
+                           placeholder="ENTER COMPANY NAME" 
+                           value="JHL Constructors" 
+                           oninput="updateCompanyName(this.value)">
                 </div>
             </div>
             
@@ -144,18 +164,20 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-end mb-4">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-bold text-slate-700">Estimated SG&A</label>
                                 <span id="label-sga-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#1A1A1A] rounded-full text-xs font-extrabold">7%</span>
                             </div>
-                            <input id="input-sga-pct" type="range" min="0.01" max="0.10" step="0.01" value="0.07" class="slider-black">
+                            <p class="text-xs text-slate-400 mb-3">Typical range of 10% to 12%</p>
+                            <input id="input-sga-pct" type="range" min="0.01" max="0.20" step="0.01" value="0.07" class="slider-black">
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-end mb-4">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-bold text-slate-700">Labor Cost %</label>
                                 <span id="label-labor-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">25%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">25% average for subcontracted. 35% average for self perform</p>
                             <input id="input-labor-pct" type="range" min="0.1" max="0.6" step="0.01" value="0.25">
                         </div>
 
@@ -231,7 +253,7 @@
                                     <div>
                                         <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Resource Allocation</h4>
                                         <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                            With an annual volume of <span id="narrative-volume" class="font-bold text-[#D95D2A]">$0</span> and labor allocation of <span id="narrative-labor-pct" class="font-bold text-[#D95D2A]">25%</span>, JHL manages approximately <span id="narrative-labor-cost" class="font-bold text-[#D95D2A]">$0</span> in field labor spend.
+                                            With an annual volume of <span id="narrative-volume" class="font-bold text-[#D95D2A]">$0</span> and labor allocation of <span id="narrative-labor-pct" class="font-bold text-[#D95D2A]">25%</span>, <span class="company-name-text">JHL Constructors</span> manages approximately <span id="narrative-labor-cost" class="font-bold text-[#D95D2A]">$0</span> in field labor spend.
                                         </p>
                                     </div>
                                 </div>
@@ -264,6 +286,14 @@
                     <p>
                         <span class="font-bold text-slate-600">Estimated FTEs:</span> Derived from field labor spend. 
                         <a href="https://constructioncoverage.com/glossary/labor-burden" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Coverage Labor Burden</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Labor Cost Benchmarks:</span> Average provided by 
+                        <a href="https://www.ciranalytics.com/clma" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Labor Market Analyzer</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">SG&A Benchmarks:</span> 
+                        <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a>
                     </p>
                     <p>
                         <span class="font-bold text-slate-600">TRIR Benchmark:</span> Based on industry incidence rates. 
@@ -367,7 +397,7 @@
                                 <div>
                                     <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Profit Leak</h4>
                                     <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        Accounting for a <span id="narrative-rw-non" class="font-bold text-[#1A1A1A]">70%</span> nonrecoverable rate, JHL Constructors absorbs <span id="narrative-rw-exposure" class="font-black text-[#D95D2A]">$0</span> in annual direct profit erosion.
+                                        Accounting for a <span id="narrative-rw-non" class="font-bold text-[#1A1A1A]">70%</span> nonrecoverable rate, <span class="company-name-text">JHL Constructors</span> absorbs <span id="narrative-rw-exposure" class="font-black text-[#D95D2A]">$0</span> in annual direct profit erosion.
                                     </p>
                                 </div>
                             </div>
@@ -418,10 +448,11 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between mb-1">
                                 <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
                                 <span id="val-gc-pct" class="text-sm font-bold text-emerald-600">8%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
                             <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-emerald">
                         </div>
                         <div>
@@ -432,10 +463,11 @@
                             <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-emerald">
                         </div>
                         <div>
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
                                 <span id="val-slippage" class="text-sm font-bold text-emerald-600">15%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">72% of projects are delayed 38% on average</p>
                             <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-emerald">
                         </div>
                         <div class="pt-4 border-t">
@@ -470,7 +502,7 @@
                     <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
                         <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Overrun Liability</p>
                         <p id="display-overrun-cost" class="text-3xl font-black text-[#D95D2A]">$0</p>
-                        <p class="text-xs text-slate-400 mt-2">Estimated cost of slip + claim risk</p>
+                        <p class="text-xs text-slate-400 mt-2">Direct GC slip + weighted claim risk<br>(25.7% frequency × 2% volume)</p>
                     </div>
                 </div>
 
@@ -495,7 +527,7 @@
                                 <div>
                                     <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Overrun Risk</h4>
                                     <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-emerald-600">$1.2M</span> in non-recoverable overhead.
+                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-emerald-600">$1.2M</span> in non-recoverable overhead (excluding claim risks).
                                     </p>
                                 </div>
                             </div>
@@ -517,12 +549,20 @@
                 <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
                     <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
                     <p>
+                        <span class="font-bold text-slate-600">General Conditions Benchmarks:</span> 
+                        <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a>
+                    </p>
+                    <p>
                         <span class="font-bold text-slate-600">Average settled claim of 2%:</span> Benchmark for claim value relative to project volume. 
                         <a href="https://www.foundamental.com/perspectives/disputes-in-construction" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Foundamental Perspectives</a>
                     </p>
                     <p>
                         <span class="font-bold text-slate-600">Frequency of claims:</span> Analysis of claim occurrence rates. 
                         <a href="https://www.nationalacademies.org/read/11846/chapter/9" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Academies Report</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Scope change impact:</span> Impact conflicts affect 25.7% of disputed projects. 
+                        <a href="https://www.constructiondive.com/news/time-money-fewer-construction-disputes-americas/808089/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Dive</a>
                     </p>
                 </div>
 
@@ -551,11 +591,37 @@
                 </label>
             </div>
 
-            <!-- Changed grid from cols-3 to cols-2 since card was removed -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Investment Inputs (New) -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow max-w-4xl mx-auto">
+                <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4"><span class="company-name-text">JHL Constructors</span> Investment</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-2">Annual Software Investment</label>
+                        <div class="relative rounded-xl">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                            <input id="input-invest-annual" type="text" class="w-full pl-8 pr-4 py-3 bg-[#F9F7F5] border border-[#EAE3D9] rounded-xl focus:border-[#D95D2A] outline-none font-bold text-slate-700" value="50,000" oninput="formatCurrencyInput(this)">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-2">One-Time Professional Services</label>
+                        <div class="relative rounded-xl">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                            <input id="input-invest-onetime" type="text" class="w-full pl-8 pr-4 py-3 bg-[#F9F7F5] border border-[#EAE3D9] rounded-xl focus:border-[#D95D2A] outline-none font-bold text-slate-700" value="10,000" oninput="formatCurrencyInput(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Changed grid from cols-2 to cols-3 to accommodate ROI card -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase mb-2">Total Year 1 Realization</p>
                     <h3 id="summary-total-savings" class="text-4xl font-black text-[#D95D2A]">$0</h3>
+                </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
+                    <p class="text-xs font-bold text-gray-400 uppercase mb-2">Year 1 ROI</p>
+                    <!-- Changed text color to emerald (green) -->
+                    <h3 id="summary-roi-y1" class="text-4xl font-black text-emerald-600">0%</h3>
                 </div>
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase mb-2">3-Year Cumulative Value</p>
@@ -576,7 +642,7 @@
         const toShort = (val) => val >= 1e6 ? '$' + (val/1e6).toFixed(1) + 'M' : val >= 1e3 ? '$' + Math.round(val/1e3) + 'k' : '$' + val;
 
         let roiChart = null;
-        const state = { safety: 0, rework: 0, schedule: 0 };
+        const state = { safety: 0, rework: 0, schedule: 0, roi: [0,0,0] };
 
         function switchTab(tab) {
             ['safety', 'rework', 'schedule', 'summary'].forEach(t => {
@@ -616,11 +682,57 @@
             calculate();
         }
 
+        // Generic currency formatter for investment inputs (no syncing)
+        function formatCurrencyInput(input) {
+            let rawValue = input.value.replace(/\D/g, '');
+            if (rawValue === '') {
+                calculate();
+                return;
+            }
+            input.value = Number(rawValue).toLocaleString();
+            calculate();
+        }
+
+        // Update company name text throughout dashboard
+        function updateCompanyName(name) {
+            const companyName = name.trim() || 'The Company';
+            document.querySelectorAll('.company-name-text').forEach(el => {
+                el.innerText = companyName;
+            });
+        }
+
+        // Handle logo URL input
+        function updateLogoFromUrl(input) {
+            const url = input.value.trim();
+            const img = document.getElementById('company-logo-img');
+            
+            if (url.length > 5) { // Basic length check to avoid breaking on single chars
+                img.src = url;
+                
+                // Add error handler in case URL is bad
+                img.onerror = function() {
+                    img.classList.add('hidden');
+                    input.classList.remove('opacity-0', 'hover:opacity-100', 'focus:opacity-100');
+                };
+                
+                img.onload = function() {
+                    img.classList.remove('hidden');
+                    // When image loads successfully, hide the input unless hovered
+                    input.classList.add('opacity-0', 'hover:opacity-100', 'focus:opacity-100');
+                };
+            } else {
+                img.classList.add('hidden');
+                input.classList.remove('opacity-0', 'hover:opacity-100', 'focus:opacity-100');
+            }
+        }
+
         function calculate() {
             // Helper to safely get value from an input ID, defaulting to 0 if missing or empty
             const getVal = (id) => {
                 const el = document.getElementById(id);
-                return el ? parseFloat(el.value) : 0;
+                if (!el) return 0;
+                // Clean commas if present
+                return parseFloat(el.value.replace(/,/g, '')) || 0;
             };
 
             // Safe volume retrieval (handles commas and missing elements)
@@ -707,8 +819,8 @@
             const overrunDays = durationDays * slippagePct;
             const overrunCost = overrunDays * dailyBurn;
             
-            // Adding a 2% Claim Risk Exposure (derived from source methodology)
-            const claimExposure = vol * 0.02; 
+            // Updated Claim Risk Calculation: 25.7% frequency * 2% avg claim value * volume
+            const claimExposure = vol * 0.02 * 0.257; 
             
             const totalScheduleExposure = overrunCost + claimExposure;
             state.schedule = totalScheduleExposure * schedRed;
@@ -729,7 +841,7 @@
             if (document.getElementById('narrative-sched-daily-burn')) document.getElementById('narrative-sched-daily-burn').innerText = toCurrency(dailyBurn);
             if (document.getElementById('narrative-sched-duration')) document.getElementById('narrative-sched-duration').innerText = durationMo;
             if (document.getElementById('narrative-sched-slippage')) document.getElementById('narrative-sched-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
-            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost);
+            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost); // Narrative focused on direct overrun
             if (document.getElementById('narrative-sched-red')) document.getElementById('narrative-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-sched-savings')) document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
 
@@ -744,10 +856,32 @@
             const rOn = rTog ? rTog.checked : true;
             const scOn = scTog ? scTog.checked : true;
 
-            const y1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0);
+            // Raw Savings Per Year (using growth factors from chart logic)
+            const savingsY1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0);
+            const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0);
+            const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0);
+
+            // Investments
+            const investAnnual = getVal('input-invest-annual');
+            const investOneTime = getVal('input-invest-onetime');
+            
+            const costY1 = investAnnual + investOneTime;
+            const costY2 = investAnnual;
+            const costY3 = investAnnual;
+
+            // Calculate ROI % = ((Return - Cost) / Cost) * 100
+            // Guard against divide by zero
+            const roiY1 = costY1 > 0 ? ((savingsY1 - costY1) / costY1) * 100 : 0;
+            const roiY2 = costY2 > 0 ? ((savingsY2 - costY2) / costY2) * 100 : 0;
+            const roiY3 = costY3 > 0 ? ((savingsY3 - costY3) / costY3) * 100 : 0;
+
+            state.roi = [roiY1, roiY2, roiY3];
+
+            const y1 = savingsY1; // For display on card
             
             if (document.getElementById('summary-total-savings')) document.getElementById('summary-total-savings').innerText = toCurrency(y1);
-            if (document.getElementById('summary-total-3yr')) document.getElementById('summary-total-3yr').innerText = toCurrency(y1 * 3);
+            if (document.getElementById('summary-roi-y1')) document.getElementById('summary-roi-y1').innerText = roiY1.toFixed(0) + '%';
+            if (document.getElementById('summary-total-3yr')) document.getElementById('summary-total-3yr').innerText = toCurrency(savingsY1 + savingsY2 + savingsY3);
         }
 
         function renderChart() {
@@ -769,17 +903,54 @@
             // Prepare datasets conditionally
             const datasets = [];
             
+            // ROI Line (Right Axis) - Added First so it renders on top if using 'order' property, 
+            // but chart.js renders datasets in order. Lines usually render on top of bars automatically if mixed.
+            datasets.push({
+                type: 'line',
+                label: 'ROI %',
+                data: state.roi,
+                borderColor: '#1A1A1A',
+                borderWidth: 3,
+                pointBackgroundColor: '#1A1A1A',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 6,
+                yAxisID: 'y1',
+                order: 0 // Render on top
+            });
+
             if (sOn) {
                 // Safety: Orange
-                datasets.push({ label: 'Incident Reduction', data: [state.safety, state.safety * 1.1, state.safety * 1.25], backgroundColor: '#D95D2A', borderRadius: 6 });
+                datasets.push({ 
+                    label: 'Incident Reduction', 
+                    data: [state.safety, state.safety * 1.1, state.safety * 1.25], 
+                    backgroundColor: '#D95D2A', 
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
             }
             if (rOn) {
-                // Rework: Black (Changed from Green)
-                datasets.push({ label: 'Rework Reduction', data: [state.rework, state.rework * 1.1, state.rework * 1.25], backgroundColor: '#1A1A1A', borderRadius: 6 });
+                // Rework: Black
+                datasets.push({ 
+                    label: 'Rework Reduction', 
+                    data: [state.rework, state.rework * 1.1, state.rework * 1.25], 
+                    backgroundColor: '#4B5563', // Changed to Dark Gray to distinct from black line
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
             }
             if (scOn) {
-                // Schedule: Tan (Changed from Blue)
-                datasets.push({ label: 'Schedule Improvement', data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], backgroundColor: '#EAE3D9', borderRadius: 6 });
+                // Schedule: Tan
+                datasets.push({ 
+                    label: 'Schedule Improvement', 
+                    data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], 
+                    backgroundColor: '#EAE3D9', 
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
             }
 
             roiChart = new Chart(ctx, {
@@ -791,12 +962,49 @@
                 options: { 
                     responsive: true, 
                     maintainAspectRatio: false, 
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
                     scales: { 
                         x: { stacked: true }, 
-                        y: { stacked: true, ticks: { callback: (v) => toShort(v) } } 
+                        y: { 
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            stacked: true, 
+                            ticks: { callback: (v) => toShort(v) },
+                            title: { display: true, text: 'Realized Savings ($)' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                            },
+                            ticks: { callback: (v) => v.toFixed(0) + '%' },
+                            title: { display: true, text: 'Return on Investment (%)' }
+                        }
                     },
                     plugins: {
-                        legend: { position: 'bottom' }
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.dataset.type === 'line') {
+                                        label += Math.round(context.raw) + '%';
+                                    } else {
+                                        label += toCurrency(context.raw);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
                     }
                 }
             });

@@ -135,7 +135,9 @@
         <div class="max-w-7xl mx-auto px-6 flex gap-10 overflow-x-auto">
             <button onclick="switchTab('safety')" id="tab-safety" class="h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Incident Reduction</button>
             <button onclick="switchTab('rework')" id="tab-rework" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Rework Reduction</button>
-            <button onclick="switchTab('schedule')" id="tab-schedule" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Schedule Improvement</button>
+            <button onclick="switchTab('schedule')" id="tab-schedule" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">GC Overrun Reduction</button>
+            <button onclick="switchTab('rfi')" id="tab-rfi" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">RFI Response Reduction</button>
+            <button onclick="switchTab('bidder')" id="tab-bidder" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Bidder Selection Improvement</button>
             <button onclick="switchTab('summary')" id="tab-summary" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Executive Summary</button>
         </div>
     </nav>
@@ -325,27 +327,27 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between mb-1">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Total Rework % of Volume</label>
-                                <span id="val-rw-pct" class="text-sm font-bold text-[#D95D2A]">2.5%</span>
+                                <span id="val-rw-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">2.5%</span>
                             </div>
                             <p class="text-xs text-slate-400 mb-3">12% average. Ranges from 2% to 20%</p>
                             <input type="range" id="input-rw-pct" min="0.5" max="15" step="0.1" value="2.5">
                         </div>
                         
                         <div>
-                            <div class="flex justify-between mb-1">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable</label>
-                                <span id="val-rw-non" class="text-sm font-bold text-[#D95D2A]">70%</span>
+                                <span id="val-rw-non" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
                             </div>
                             <p class="text-xs text-slate-400 mb-3">70% average</p>
                             <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
                         </div>
 
                         <div class="pt-4 border-t">
-                            <div class="flex justify-between mb-1">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
-                                <span id="val-rw-red" class="text-sm font-bold text-emerald-600">5.0%</span>
+                                <span id="val-rw-red" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">5.0%</span>
                             </div>
                             <input type="range" id="input-rw-red" min="1" max="25" step="1" value="5.0" class="slider-emerald">
                         </div>
@@ -430,50 +432,54 @@
             </div>
         </section>
 
-        <!-- Tab 3: Schedule & Overhead (NEW REPLACEMENT) -->
+        <!-- Tab 3: GC Overrun Reduction -->
         <section id="content-schedule" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-emerald-600"></i> Schedule Variables</h2>
+                    <!-- Changed icon text color to Orange -->
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-[#D95D2A]"></i> GC Overrun Variables</h2>
                     <div class="space-y-8">
                         
                         <!-- NEW Annual Volume Input for Tab 3 -->
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
                             <div class="relative rounded-2xl">
-                                <!-- Styled with Emerald/Green for Tab 3 consistency -->
-                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-600 font-bold text-lg">$</span>
-                                <input id="input-annual-volume-schedule" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-emerald-600 outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                                <!-- Changed $ color and focus border to Orange -->
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-schedule" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                             </div>
                         </div>
 
                         <div>
-                            <div class="flex justify-between mb-1">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
-                                <span id="val-gc-pct" class="text-sm font-bold text-emerald-600">8%</span>
+                                <!-- Bubble Style -->
+                                <span id="val-gc-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
                             </div>
                             <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
-                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" class="slider-emerald">
+                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8">
                         </div>
                         <div>
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between items-end mb-2">
                                 <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
-                                <span id="val-duration" class="text-sm font-bold text-emerald-600">12</span>
+                                <!-- Bubble Style -->
+                                <span id="val-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
                             </div>
-                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" class="slider-emerald">
+                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12">
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
+                            <div class="flex justify-between items-end mb-1">
                                 <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
-                                <span id="val-slippage" class="text-sm font-bold text-emerald-600">15%</span>
+                                <!-- Bubble Style -->
+                                <span id="val-slippage" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">15%</span>
                             </div>
                             <p class="text-xs text-slate-400 mb-3">72% of projects are delayed 38% on average</p>
-                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15" class="slider-emerald">
+                            <input type="range" id="input-slippage" min="0" max="50" step="5" value="15">
                         </div>
                         <div class="pt-4 border-t">
-                            <div class="flex justify-between mb-2">
+                            <div class="flex justify-between items-end mb-2">
                                 <label class="text-sm font-semibold text-emerald-700">Delay Reduction Target</label>
-                                <span id="val-sched-red" class="text-sm font-bold text-emerald-600">10%</span>
+                                <span id="val-sched-red" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
                             </div>
                             <input type="range" id="input-sched-red" min="1" max="30" step="1" value="10" class="slider-emerald">
                         </div>
@@ -484,7 +490,7 @@
             <div class="lg:col-span-8 space-y-6">
                 <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
                     <div class="relative z-10">
-                        <p class="text-emerald-100 font-bold uppercase tracking-widest text-xs mb-2">Schedule & Overhead Savings</p>
+                        <p class="text-emerald-100 font-bold uppercase tracking-widest text-xs mb-2">GC Overrun Reduction Savings</p>
                         <h2 id="display-sched-savings" class="text-6xl font-black mb-4">$0</h2>
                         <p class="text-emerald-100/80 max-w-md text-sm leading-relaxed">
                             Proactively mitigating schedule delays reduces the non-reimbursable burn of General Conditions and limits exposure to liquidated damages.
@@ -502,14 +508,15 @@
                     <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
                         <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Overrun Liability</p>
                         <p id="display-overrun-cost" class="text-3xl font-black text-[#D95D2A]">$0</p>
-                        <p class="text-xs text-slate-400 mt-2">Direct GC slip + weighted claim risk<br>(25.7% frequency × 2% volume)</p>
+                        <!-- Updated description to remove claim risk -->
+                        <p class="text-xs text-slate-400 mt-2">Estimated cost of extending General Conditions</p>
                     </div>
                 </div>
 
                 <!-- Schedule ROI Narrative (NEW ADDITION) -->
                 <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                     <div class="p-8 md:p-12">
-                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Schedule ROI Narrative</h3>
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">GC Overrun Reduction Narrative</h3>
                         <div class="space-y-12 relative">
                             <!-- Step 1 -->
                             <div class="flex gap-8 items-start relative z-10">
@@ -527,7 +534,7 @@
                                 <div>
                                     <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Overrun Risk</h4>
                                     <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-[#D95D2A]">$1.2M</span> in non-recoverable overhead (excluding claim risks).
+                                        A typical <span id="narrative-sched-duration" class="font-bold text-[#1A1A1A]">12</span> month project slipping by <span id="narrative-sched-slippage" class="font-bold text-[#1A1A1A]">15%</span> creates an immediate liability of <span id="narrative-sched-overrun" class="font-black text-[#D95D2A]">$1.2M</span> in non-recoverable overhead.
                                     </p>
                                 </div>
                             </div>
@@ -536,7 +543,7 @@
                                 <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="hourglass" size="32"></i></div>
                                 <div>
                                     <h4 class="text-2xl font-black text-emerald-900 leading-tight">Efficiency Dividend</h4>
-                                    <p class="text-emerald-700 mt-1">Improving schedule efficiency by <span id="narrative-sched-red" class="font-black underline decoration-4 decoration-emerald-200">10%</span> recaptures:</p>
+                                    <p class="text-emerald-700 mt-1">Reducing GC overruns by <span id="narrative-sched-red" class="font-black underline decoration-4 decoration-emerald-200">10%</span> recaptures:</p>
                                     <div id="narrative-sched-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
                                 </div>
                             </div>
@@ -552,20 +559,343 @@
                         <span class="font-bold text-slate-600">General Conditions Benchmarks:</span> 
                         <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a>
                     </p>
-                    <p>
-                        <span class="font-bold text-slate-600">Average settled claim of 2%:</span> Benchmark for claim value relative to project volume. 
-                        <a href="https://www.foundamental.com/perspectives/disputes-in-construction" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Foundamental Perspectives</a>
-                    </p>
-                    <p>
-                        <span class="font-bold text-slate-600">Frequency of claims:</span> Analysis of claim occurrence rates. 
-                        <a href="https://www.nationalacademies.org/read/11846/chapter/9" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Academies Report</a>
-                    </p>
-                    <p>
-                        <span class="font-bold text-slate-600">Scope change impact:</span> Impact conflicts affect 25.7% of disputed projects. 
-                        <a href="https://www.constructiondive.com/news/time-money-fewer-construction-disputes-americas/808089/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Dive</a>
-                    </p>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- Tab 4: RFI Response Time Reduction (NEW) -->
+        <section id="content-rfi" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
+                    <!-- Changed Violet to Orange -->
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="file-text" class="w-5 h-5 text-[#D95D2A]"></i> RFI Variables</h2>
+                    <div class="space-y-8">
+                        
+                        <!-- Synced Volume Input -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <!-- Changed Violet to Orange -->
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-rfi" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                            </div>
+                        </div>
+
+                        <!-- General Conditions % (Synced with Tab 3) -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
+                                <!-- Changed text color to Orange -->
+                                <span id="val-rfi-gc" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
+                            <input type="range" id="input-rfi-gc" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-rfi-gc', 'input-gc-pct')">
+                        </div>
+
+                        <!-- Avg Project Duration (Synced with Tab 3) -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
+                                <!-- Changed text color to Orange -->
+                                <span id="val-rfi-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
+                            </div>
+                            <input type="range" id="input-rfi-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-rfi-duration', 'input-duration')">
+                        </div>
+
+                        <!-- % of Critical Path RFIs -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">% of Critical Path RFIs</label>
+                                <!-- Changed text color to Orange -->
+                                <span id="val-rfi-critical" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">20%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average: 15% to 25%</p>
+                            <input type="range" id="input-rfi-critical" min="5" max="30" step="1" value="20">
+                        </div>
+
+                        <!-- RFI % from field errors -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">RFI % from field errors</label>
+                                <!-- Changed text color to Orange -->
+                                <span id="val-rfi-error" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">30%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average 30%</p>
+                            <input type="range" id="input-rfi-error" min="20" max="40" step="1" value="30">
+                        </div>
+
+                        <!-- Rework Cost Multiplier -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Rework Cost (GC Multiplier)</label>
+                                <!-- Changed text color to Orange -->
+                                <span id="val-rfi-mult" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">10x</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average is 10x Daily Burn</p>
+                            <input type="range" id="input-rfi-mult" min="5" max="15" step="1" value="10">
+                        </div>
+
+                        <!-- Improvement Target -->
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-emerald-700">RFI Reduction Target</label>
+                                <span id="val-rfi-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">15%</span>
+                            </div>
+                            <input type="range" id="input-rfi-improve" min="1" max="50" step="1" value="15" class="slider-emerald">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Hero Card -->
+                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Critical Path Savings</p>
+                        <h2 id="display-rfi-savings" class="text-6xl font-black mb-4">$0</h2>
+                        <p class="text-white/80 max-w-md text-sm leading-relaxed">
+                            Mitigating field errors and accelerating critical path RFI responses prevents costly rework cycles and compounded schedule delays.
+                        </p>
+                    </div>
+                    <i data-lucide="file-text" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
+                </div>
+
+                <!-- Secondary Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Critical Error RFIs</p>
+                        <p id="display-rfi-count" class="text-3xl font-black text-slate-800">0</p>
+                        <p class="text-xs text-slate-400 mt-2">Est. annual RFIs driving delay/rework</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Est. Rework Cost per Impact</p>
+                        <!-- Changed Violet to Orange -->
+                        <p id="display-rfi-burden" class="text-3xl font-black text-[#D95D2A]">$0</p>
+                        <p class="text-xs text-slate-400 mt-2">10x Daily Burn Rate</p>
+                    </div>
+                </div>
+
+                <!-- Narrative -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">RFI Impact Narrative</h3>
+                        <div class="space-y-12 relative">
+                            <!-- Step 1 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Critical Few</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        Assuming <span id="narrative-rfi-error" class="font-bold text-[#D95D2A]">30%</span> of RFIs stem from field errors and <span id="narrative-rfi-critical" class="font-bold text-[#D95D2A]">20%</span> of those impact the critical path, <span class="company-name-text">JHL Constructors</span> faces approx. <span id="narrative-rfi-count" class="font-bold text-[#D95D2A]">0</span> high-impact events annually.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Cost of Delay</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        With a daily GC burn of <span id="narrative-rfi-burn" class="font-bold text-[#1A1A1A]">$0</span>, a single rework event costs <span id="narrative-rfi-mult" class="font-bold text-[#1A1A1A]">10x</span> that rate, totaling <span id="narrative-rfi-cost" class="font-black text-[#D95D2A]">$0</span> per incident in lost time and remediation.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
+                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="clock" size="32"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">Field Efficiency</h4>
+                                    <p class="text-emerald-700 mt-1">Reducing these critical gaps by <span id="narrative-rfi-improve" class="font-black underline decoration-4 decoration-emerald-200">15%</span> saves:</p>
+                                    <div id="narrative-rfi-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
+                                </div>
+                            </div>
+                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footnotes -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">RFI Impact Costs:</span> 
+                        <a href="https://www.navigant.com/-/media/navigant/industries/construction/2013-impact-control-of-rfis.pdf" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Navigant Construction Forum</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 3.5: Bidder Selection Improvement (NEW) -->
+        <section id="content-bidder" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
+                    <!-- Changed icon text color to Orange -->
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-[#D95D2A]"></i> Bidder Variables</h2>
+                    <div class="space-y-8">
+                        
+                        <!-- Synced Volume Input -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <!-- Changed $ color and focus border to Orange -->
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-bidder" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                            </div>
+                        </div>
+
+                        <!-- Low Bidder Selection -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Low Bidder Selection %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-low" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">50% Average</p>
+                            <input type="range" id="input-bid-low" min="25" max="100" step="5" value="50">
+                        </div>
+
+                        <!-- Project Dispute % -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Project Dispute %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-dispute" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">70% Average</p>
+                            <input type="range" id="input-bid-dispute" min="0" max="100" step="5" value="70">
+                        </div>
+
+                        <!-- Initial Dispute Value -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Initial Dispute Value %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-initial" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Average 8% of Project Value</p>
+                            <input type="range" id="input-bid-initial" min="1" max="20" step="0.5" value="8">
+                        </div>
+
+                        <!-- Typical Settlement -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Typical Settlement %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-settle" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">2%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Average 2% of Project Value</p>
+                            <input type="range" id="input-bid-settle" min="0.5" max="10" step="0.5" value="2">
+                        </div>
+
+                        <!-- Recovery Rate -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Recovery Rate %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-recover" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Average 50% of Claimed Amount</p>
+                            <input type="range" id="input-bid-recover" min="0" max="100" step="5" value="50">
+                        </div>
+
+                        <!-- Improvement Target -->
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-emerald-700">Bidder Selection Improvement</label>
+                                <span id="val-bid-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
+                            </div>
+                            <input type="range" id="input-bid-improve" min="1" max="30" step="1" value="10" class="slider-emerald">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Hero Card -->
+                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Dispute Avoidance Savings</p>
+                        <h2 id="display-bid-savings" class="text-6xl font-black mb-4">$0</h2>
+                        <p class="text-white/80 max-w-md text-sm leading-relaxed">
+                            Improving bidder selection criteria reduces the frequency of low-performing subcontractors, mitigating downstream dispute costs and settlement liabilities.
+                        </p>
+                    </div>
+                    <i data-lucide="users" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
+                </div>
+
+                <!-- Secondary Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Dispute Exposure</p>
+                        <p id="display-bid-exposure" class="text-3xl font-black text-slate-800">$0</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Settlement Liability</p>
+                        <p id="display-bid-liability" class="text-3xl font-black text-emerald-600">$0</p>
+                    </div>
+                </div>
+
+                <!-- Narrative -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Bidder Selection Narrative</h3>
+                        <div class="space-y-12 relative">
+                            <!-- Step 1 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <!-- Changed text-blue-600 to text-[#D95D2A] -->
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Low Bid Risk</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        <!-- Changed text-blue-600 to text-[#D95D2A] -->
+                                        With <span id="narrative-bid-low" class="font-bold text-[#D95D2A]">50%</span> of volume awarded to low bidders and a <span id="narrative-bid-freq" class="font-bold text-[#D95D2A]">70%</span> dispute frequency, <span class="company-name-text">JHL Constructors</span> faces high exposure to performance-based claims.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <!-- Changed text-blue-600 to text-[#D95D2A] -->
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Cost of Conflict</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        Initial disputes could total <span id="narrative-bid-initial" class="font-bold text-[#1A1A1A]">$0</span> annually. Factoring in a <span id="narrative-bid-settle-pct" class="font-bold text-[#1A1A1A]">2%</span> settlement cost, the direct bottom-line hit is estimated at <span id="narrative-bid-settle-val" class="font-black text-[#D95D2A]">$0</span> per year.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
+                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="shield-check" size="32"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">Selection Value</h4>
+                                    <p class="text-emerald-700 mt-1">Improving selection criteria by <span id="narrative-bid-improve" class="font-black underline decoration-4 decoration-emerald-200">10%</span> avoids:</p>
+                                    <div id="narrative-bid-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
+                                </div>
+                            </div>
+                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footnotes -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">Dispute Frequency:</span>
+                        <a href="https://www.nationalacademies.org/read/11846/chapter/9" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Academies</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Design-Build Effectiveness:</span>
+                        <a href="https://www.fhwa.dot.gov/reports/designbuild/designbuild.pdf" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">FHWA Design-Build Report</a>
+                    </p>
+                    <p>
+                        <span class="font-bold text-slate-600">Claim Recovery Rates:</span>
+                        <a href="https://www.nationalacademies.org/read/11846/chapter/9" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Academies (Chapter 9)</a>
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -581,13 +911,26 @@
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-rework" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <!-- Updated to Black (#1A1A1A) -->
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1A1A1A]"></div>
                     <span class="ms-3 text-sm font-bold text-gray-700">Rework Reduction</span>
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-schedule" class="sr-only peer" checked onchange="calculate(); renderChart();">
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#EAE3D9]"></div>
-                    <span class="ms-3 text-sm font-bold text-gray-700">Schedule Improvement</span>
+                    <span class="ms-3 text-sm font-bold text-gray-700">GC Overrun Reduction</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-rfi" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <!-- Updated to #8d6e5b -->
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8d6e5b]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">RFI Reduction</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-bidder" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <!-- Updated to #566578 -->
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#566578]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Bidder Selection</span>
                 </label>
             </div>
 
@@ -642,10 +985,10 @@
         const toShort = (val) => val >= 1e6 ? '$' + (val/1e6).toFixed(1) + 'M' : val >= 1e3 ? '$' + Math.round(val/1e3) + 'k' : '$' + val;
 
         let roiChart = null;
-        const state = { safety: 0, rework: 0, schedule: 0, roi: [0,0,0] };
+        const state = { safety: 0, rework: 0, schedule: 0, rfi: 0, bidder: 0, roi: [0,0,0] };
 
         function switchTab(tab) {
-            ['safety', 'rework', 'schedule', 'summary'].forEach(t => {
+            ['safety', 'rework', 'schedule', 'rfi', 'bidder', 'summary'].forEach(t => {
                 document.getElementById(`content-${t}`).classList.add('hidden');
                 document.getElementById(`tab-${t}`).className = 'h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap';
             });
@@ -669,7 +1012,9 @@
             const volInputs = [
                 document.getElementById('input-annual-volume'),
                 document.getElementById('input-annual-volume-rework'),
-                document.getElementById('input-annual-volume-schedule')
+                document.getElementById('input-annual-volume-schedule'),
+                document.getElementById('input-annual-volume-rfi'),
+                document.getElementById('input-annual-volume-bidder')
             ];
             
             volInputs.forEach(el => {
@@ -726,6 +1071,16 @@
             }
         }
 
+        // NEW: Sync function for shared inputs (GC & Duration)
+        function syncInputs(sourceId, targetId) {
+            const val = document.getElementById(sourceId).value;
+            const target = document.getElementById(targetId);
+            if(target) {
+                target.value = val;
+                calculate(); // Trigger recalc which handles updating both UIs
+            }
+        }
+
         function calculate() {
             // Helper to safely get value from an input ID, defaulting to 0 if missing or empty
             const getVal = (id) => {
@@ -744,8 +1099,12 @@
                 // Fallback to others if Tab 1 input missing
                 const volInput2 = document.getElementById('input-annual-volume-rework');
                 const volInput3 = document.getElementById('input-annual-volume-schedule');
+                const volInput4 = document.getElementById('input-annual-volume-bidder');
+                const volInput5 = document.getElementById('input-annual-volume-rfi');
                 if (volInput2) vol = parseFloat(volInput2.value.replace(/,/g, '')) || 0;
                 else if (volInput3) vol = parseFloat(volInput3.value.replace(/,/g, '')) || 0;
+                else if (volInput4) vol = parseFloat(volInput4.value.replace(/,/g, '')) || 0;
+                else if (volInput5) vol = parseFloat(volInput5.value.replace(/,/g, '')) || 0;
             }
 
             // --- Safety Logic ---
@@ -819,10 +1178,7 @@
             const overrunDays = durationDays * slippagePct;
             const overrunCost = overrunDays * dailyBurn;
             
-            // Updated Claim Risk Calculation: 25.7% frequency * 2% avg claim value * volume
-            const claimExposure = vol * 0.02 * 0.257; 
-            
-            const totalScheduleExposure = overrunCost + claimExposure;
+            const totalScheduleExposure = overrunCost; 
             state.schedule = totalScheduleExposure * schedRed;
 
             // Schedule UI
@@ -841,25 +1197,95 @@
             if (document.getElementById('narrative-sched-daily-burn')) document.getElementById('narrative-sched-daily-burn').innerText = toCurrency(dailyBurn);
             if (document.getElementById('narrative-sched-duration')) document.getElementById('narrative-sched-duration').innerText = durationMo;
             if (document.getElementById('narrative-sched-slippage')) document.getElementById('narrative-sched-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
-            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost); // Narrative focused on direct overrun
+            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost);
             if (document.getElementById('narrative-sched-red')) document.getElementById('narrative-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-sched-savings')) document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
 
+            // --- RFI Logic (UPDATED) ---
+            const rfiCriticalPct = getVal('input-rfi-critical') / 100;
+            const rfiErrorPct = getVal('input-rfi-error') / 100;
+            const rfiMult = getVal('input-rfi-mult');
+            const rfiImprove = getVal('input-rfi-improve') / 100;
+
+            const baseRFIs = (vol / 1000000) * 10;
+            const criticalFieldRFIs = baseRFIs * rfiErrorPct * rfiCriticalPct;
+            const costPerImpact = dailyBurn * rfiMult;
+            const totalRFIExposure = criticalFieldRFIs * costPerImpact;
+            state.rfi = totalRFIExposure * rfiImprove;
+
+            // UI Updates - RFI Inputs & Syncs
+            if (document.getElementById('val-rfi-gc')) document.getElementById('val-rfi-gc').innerText = (gcPct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-rfi-duration')) document.getElementById('val-rfi-duration').innerText = durationMo;
+            
+            if (document.getElementById('val-rfi-critical')) document.getElementById('val-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-rfi-error')) document.getElementById('val-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-rfi-mult')) document.getElementById('val-rfi-mult').innerText = rfiMult + 'x';
+            if (document.getElementById('val-rfi-improve')) document.getElementById('val-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
+
+            if (document.getElementById('display-rfi-savings')) document.getElementById('display-rfi-savings').innerText = toCurrency(state.rfi);
+            if (document.getElementById('display-rfi-count')) document.getElementById('display-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
+            if (document.getElementById('display-rfi-burden')) document.getElementById('display-rfi-burden').innerText = toCurrency(costPerImpact);
+
+            if (document.getElementById('narrative-rfi-error')) document.getElementById('narrative-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-rfi-critical')) document.getElementById('narrative-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-rfi-count')) document.getElementById('narrative-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
+            if (document.getElementById('narrative-rfi-burn')) document.getElementById('narrative-rfi-burn').innerText = toCurrency(dailyBurn);
+            if (document.getElementById('narrative-rfi-mult')) document.getElementById('narrative-rfi-mult').innerText = rfiMult + 'x';
+            if (document.getElementById('narrative-rfi-cost')) document.getElementById('narrative-rfi-cost').innerText = toCurrency(costPerImpact);
+            if (document.getElementById('narrative-rfi-improve')) document.getElementById('narrative-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-rfi-savings')) document.getElementById('narrative-rfi-savings').innerText = toCurrency(state.rfi);
+
+            // --- Bidder Selection Logic ---
+            const bidLowPct = getVal('input-bid-low') / 100;
+            const bidDisputePct = getVal('input-bid-dispute') / 100;
+            const bidInitialPct = getVal('input-bid-initial') / 100;
+            const bidSettlePct = getVal('input-bid-settle') / 100;
+            const bidRecoverPct = getVal('input-bid-recover') / 100;
+            const bidImprovePct = getVal('input-bid-improve') / 100;
+
+            const volAtRisk = vol * bidLowPct;
+            const disputeVol = volAtRisk * bidDisputePct;
+            const totalDisputeValue = disputeVol * bidInitialPct;
+            const settlementLiability = disputeVol * bidSettlePct;
+            state.bidder = settlementLiability * bidImprovePct;
+
+            // UI Updates - Bidder
+            if (document.getElementById('val-bid-low')) document.getElementById('val-bid-low').innerText = (bidLowPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-bid-dispute')) document.getElementById('val-bid-dispute').innerText = (bidDisputePct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-bid-initial')) document.getElementById('val-bid-initial').innerText = (bidInitialPct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-bid-settle')) document.getElementById('val-bid-settle').innerText = (bidSettlePct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-bid-recover')) document.getElementById('val-bid-recover').innerText = (bidRecoverPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-bid-improve')) document.getElementById('val-bid-improve').innerText = (bidImprovePct * 100).toFixed(0) + '%';
+
+            if (document.getElementById('display-bid-savings')) document.getElementById('display-bid-savings').innerText = toCurrency(state.bidder);
+            if (document.getElementById('display-bid-exposure')) document.getElementById('display-bid-exposure').innerText = toCurrency(totalDisputeValue);
+            if (document.getElementById('display-bid-liability')) document.getElementById('display-bid-liability').innerText = toCurrency(settlementLiability);
+
+            if (document.getElementById('narrative-bid-low')) document.getElementById('narrative-bid-low').innerText = (bidLowPct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-bid-freq')) document.getElementById('narrative-bid-freq').innerText = (bidDisputePct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-bid-initial')) document.getElementById('narrative-bid-initial').innerText = toCurrency(totalDisputeValue);
+            if (document.getElementById('narrative-bid-settle-pct')) document.getElementById('narrative-bid-settle-pct').innerText = (bidSettlePct * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-bid-settle-val')) document.getElementById('narrative-bid-settle-val').innerText = toCurrency(settlementLiability);
+            if (document.getElementById('narrative-bid-improve')) document.getElementById('narrative-bid-improve').innerText = (bidImprovePct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-bid-savings')) document.getElementById('narrative-bid-savings').innerText = toCurrency(state.bidder);
 
             // --- Global Summary ---
             // Check toggles (if they exist, default to true)
             const sTog = document.getElementById('toggle-safety');
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
+            const rfTog = document.getElementById('toggle-rfi');
+            const bTog = document.getElementById('toggle-bidder');
             
             const sOn = sTog ? sTog.checked : true;
             const rOn = rTog ? rTog.checked : true;
             const scOn = scTog ? scTog.checked : true;
+            const rfOn = rfTog ? rfTog.checked : true;
+            const bOn = bTog ? bTog.checked : true;
 
-            // Raw Savings Per Year (using growth factors from chart logic)
-            const savingsY1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0);
-            const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0);
-            const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0);
+            const savingsY1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0) + (rfOn ? state.rfi : 0) + (bOn ? state.bidder : 0);
+            const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0) + (rfOn ? state.rfi * 1.1 : 0) + (bOn ? state.bidder * 1.1 : 0);
+            const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0) + (rfOn ? state.rfi * 1.25 : 0) + (bOn ? state.bidder * 1.25 : 0);
 
             // Investments
             const investAnnual = getVal('input-invest-annual');
@@ -895,16 +1321,19 @@
             const sTog = document.getElementById('toggle-safety');
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
+            const rfTog = document.getElementById('toggle-rfi');
+            const bTog = document.getElementById('toggle-bidder');
             
             const sOn = sTog ? sTog.checked : true;
             const rOn = rTog ? rTog.checked : true;
             const scOn = scTog ? scTog.checked : true;
+            const rfOn = rfTog ? rfTog.checked : true;
+            const bOn = bTog ? bTog.checked : true;
 
             // Prepare datasets conditionally
             const datasets = [];
             
-            // ROI Line (Right Axis) - Added First so it renders on top if using 'order' property, 
-            // but chart.js renders datasets in order. Lines usually render on top of bars automatically if mixed.
+            // ROI Line (Right Axis)
             datasets.push({
                 type: 'line',
                 label: 'ROI %',
@@ -935,7 +1364,7 @@
                 datasets.push({ 
                     label: 'Rework Reduction', 
                     data: [state.rework, state.rework * 1.1, state.rework * 1.25], 
-                    backgroundColor: '#4B5563', // Changed to Dark Gray to distinct from black line
+                    backgroundColor: '#1A1A1A', 
                     borderRadius: 6,
                     yAxisID: 'y',
                     order: 1
@@ -944,9 +1373,31 @@
             if (scOn) {
                 // Schedule: Tan
                 datasets.push({ 
-                    label: 'Schedule Improvement', 
+                    label: 'GC Overrun Reduction', 
                     data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], 
                     backgroundColor: '#EAE3D9', 
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
+            }
+            if (rfOn) {
+                // RFI: #8d6e5b
+                datasets.push({ 
+                    label: 'RFI Reduction', 
+                    data: [state.rfi, state.rfi * 1.1, state.rfi * 1.25], 
+                    backgroundColor: '#8d6e5b', 
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
+            }
+            if (bOn) {
+                // Bidder: #566578
+                datasets.push({ 
+                    label: 'Bidder Selection', 
+                    data: [state.bidder, state.bidder * 1.1, state.bidder * 1.25], 
+                    backgroundColor: '#566578', 
                     borderRadius: 6,
                     yAxisID: 'y',
                     order: 1

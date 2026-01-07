@@ -137,6 +137,7 @@
             <button onclick="switchTab('rework')" id="tab-rework" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Rework Reduction</button>
             <button onclick="switchTab('schedule')" id="tab-schedule" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">GC Overrun Reduction</button>
             <button onclick="switchTab('rfi')" id="tab-rfi" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">RFI Response Reduction</button>
+            <button onclick="switchTab('coordination')" id="tab-coordination" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Coordination Resolution</button>
             <button onclick="switchTab('bidder')" id="tab-bidder" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Bidder Selection Improvement</button>
             <button onclick="switchTab('summary')" id="tab-summary" class="h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap">Executive Summary</button>
         </div>
@@ -642,7 +643,7 @@
                                 <label class="text-sm font-semibold text-emerald-700">RFI Reduction Target</label>
                                 <span id="val-rfi-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">15%</span>
                             </div>
-                            <input type="range" id="input-rfi-improve" min="1" max="50" step="1" value="15" class="slider-emerald">
+                            <input type="range" id="input-rfi-improve" min="1" max="50" step="1" value="15" class="slider-emerald" oninput="syncTwoWay(this, 'input-coord-rfi-improve')">
                         </div>
 
                     </div>
@@ -727,7 +728,174 @@
             </div>
         </section>
 
-        <!-- Tab 3.5: Bidder Selection Improvement (NEW) -->
+        <!-- Tab 4.5: Coordination Resolution (NEW) -->
+        <section id="content-coordination" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="scan-search" class="w-5 h-5 text-[#D95D2A]"></i> Coordination Variables</h2>
+                    <div class="space-y-8">
+                        
+                        <!-- Synced Volume Input -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-coord" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
+                            </div>
+                        </div>
+
+                        <!-- General Conditions % (Synced) -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
+                                <span id="val-coord-gc" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
+                            <input type="range" id="input-coord-gc" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-coord-gc', 'input-gc-pct')">
+                        </div>
+
+                        <!-- Avg Project Duration (Synced) -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
+                                <span id="val-coord-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
+                            </div>
+                            <input type="range" id="input-coord-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-coord-duration', 'input-duration')">
+                        </div>
+
+                        <!-- % of Critical Path RFIs -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">% of Critical Path RFIs</label>
+                                <span id="val-coord-critical" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">20%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average: 15% to 25%</p>
+                            <input type="range" id="input-coord-critical" min="5" max="30" step="1" value="20">
+                        </div>
+
+                        <!-- RFI % from Clashes -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">RFI % from Clashes</label>
+                                <span id="val-coord-clash" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">30%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average 30%</p>
+                            <input type="range" id="input-coord-clash" min="20" max="40" step="1" value="30">
+                        </div>
+
+                        <!-- Rework Cost Multiplier -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Rework Cost (GC Multiplier)</label>
+                                <span id="val-coord-mult" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">10x</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Industry Average is 10x Daily Burn</p>
+                            <input type="range" id="input-coord-mult" min="5" max="15" step="1" value="10">
+                        </div>
+
+                        <div class="pt-4 border-t">
+                            <!-- RFI Reduction Target (New, Synced) -->
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-1">
+                                    <label class="text-sm font-semibold text-emerald-700">RFI Reduction Target</label>
+                                    <span id="val-coord-rfi-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">15%</span>
+                                </div>
+                                <input type="range" id="input-coord-rfi-improve" min="1" max="50" step="1" value="15" class="slider-emerald" oninput="syncTwoWay(this, 'input-rfi-improve')">
+                            </div>
+
+                            <!-- Clash Detection Savings Target -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <label class="text-sm font-semibold text-emerald-700">Clash Detection Savings %</label>
+                                    <span id="val-coord-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">5%</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mb-3">up to 10%</p>
+                                <input type="range" id="input-coord-improve" min="1" max="10" step="0.5" value="5" class="slider-emerald">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Hero Card -->
+                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Coordination Savings</p>
+                        <h2 id="display-coord-savings" class="text-6xl font-black mb-4">$0</h2>
+                        <p class="text-white/80 max-w-md text-sm leading-relaxed">
+                            Proactive clash detection and resolution prior to construction prevents significant rework costs, schedule delays, and field conflicts.
+                        </p>
+                    </div>
+                    <i data-lucide="scan-search" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
+                </div>
+
+                <!-- Secondary Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Clash Exposure</p>
+                        <p id="display-coord-exposure" class="text-3xl font-black text-slate-800">$0</p>
+                        <p class="text-xs text-slate-400 mt-2">Est. liability from unresolved clashes</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Est. Cost per Clash</p>
+                        <p id="display-coord-cost" class="text-3xl font-black text-[#D95D2A]">$0</p>
+                        <p class="text-xs text-slate-400 mt-2">Based on Rework & GC Impact</p>
+                    </div>
+                </div>
+
+                <!-- Narrative -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Coordination Narrative</h3>
+                        <div class="space-y-12 relative">
+                            <!-- Step 1 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Clash Factor</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        With <span id="narrative-coord-clash" class="font-bold text-[#D95D2A]">30%</span> of RFIs stemming from field clashes and <span id="narrative-coord-critical" class="font-bold text-[#D95D2A]">20%</span> impacting the critical path, uncoordinated models create significant risk.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Cost of Corrections</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        Each critical field clash triggers a rework event costing <span id="narrative-coord-cost" class="font-bold text-[#D95D2A]">$0</span> (10x daily burn). Total annual exposure is estimated at <span id="narrative-coord-exposure" class="font-black text-[#D95D2A]">$0</span>.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
+                                <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="check-circle" size="32"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black text-emerald-900 leading-tight">VDC & RFI ROI</h4>
+                                    <p class="text-emerald-700 mt-1">Combining VDC value (<span id="narrative-coord-improve" class="font-bold">5%</span> vol) and RFI clash reduction saves:</p>
+                                    <div id="narrative-coord-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
+                                </div>
+                            </div>
+                            <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footnotes -->
+                <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
+                    <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
+                    <p>
+                        <span class="font-bold text-slate-600">ROI of BIM/Clash Detection:</span> 
+                        <a href="https://ascelibrary.org/doi/10.1061/%28ASCE%29LM.1943-5630.0000127#core-collateral-c10" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">ASCE Library - ROI of BIM for Clash Detection</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 3.5: Bidder Selection Improvement (Renamed ID internally to keep order logic simple, but visually positioned after) -->
         <section id="content-bidder" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
@@ -922,13 +1090,17 @@
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-rfi" class="sr-only peer" checked onchange="calculate(); renderChart();">
-                    <!-- Updated to #8d6e5b -->
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8d6e5b]"></div>
                     <span class="ms-3 text-sm font-bold text-gray-700">RFI Reduction</span>
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="toggle-coordination" class="sr-only peer" checked onchange="calculate(); renderChart();">
+                    <!-- Updated to #cec4a1 -->
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#cec4a1]"></div>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Coordination</span>
+                </label>
+                <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-bidder" class="sr-only peer" checked onchange="calculate(); renderChart();">
-                    <!-- Updated to #566578 -->
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#566578]"></div>
                     <span class="ms-3 text-sm font-bold text-gray-700">Bidder Selection</span>
                 </label>
@@ -985,15 +1157,25 @@
         const toShort = (val) => val >= 1e6 ? '$' + (val/1e6).toFixed(1) + 'M' : val >= 1e3 ? '$' + Math.round(val/1e3) + 'k' : '$' + val;
 
         let roiChart = null;
-        const state = { safety: 0, rework: 0, schedule: 0, rfi: 0, bidder: 0, roi: [0,0,0] };
+        const state = { safety: 0, rework: 0, schedule: 0, rfi: 0, coordination: 0, bidder: 0, roi: [0,0,0] };
 
         function switchTab(tab) {
-            ['safety', 'rework', 'schedule', 'rfi', 'bidder', 'summary'].forEach(t => {
-                document.getElementById(`content-${t}`).classList.add('hidden');
-                document.getElementById(`tab-${t}`).className = 'h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap';
+            const tabs = ['safety', 'rework', 'schedule', 'rfi', 'coordination', 'bidder', 'summary'];
+            
+            tabs.forEach(t => {
+                const content = document.getElementById(`content-${t}`);
+                const tabBtn = document.getElementById(`tab-${t}`);
+                
+                if (content) content.classList.add('hidden');
+                if (tabBtn) tabBtn.className = 'h-16 px-2 text-gray-400 transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap';
             });
-            document.getElementById(`content-${tab}`).classList.remove('hidden');
-            document.getElementById(`tab-${tab}`).className = 'h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap';
+            
+            const activeContent = document.getElementById(`content-${tab}`);
+            const activeTab = document.getElementById(`tab-${tab}`);
+            
+            if (activeContent) activeContent.classList.remove('hidden');
+            if (activeTab) activeTab.className = 'h-16 px-2 tab-active transition-all uppercase text-xs font-black tracking-widest whitespace-nowrap';
+            
             if (tab === 'summary') renderChart();
         }
 
@@ -1014,6 +1196,7 @@
                 document.getElementById('input-annual-volume-rework'),
                 document.getElementById('input-annual-volume-schedule'),
                 document.getElementById('input-annual-volume-rfi'),
+                document.getElementById('input-annual-volume-coord'),
                 document.getElementById('input-annual-volume-bidder')
             ];
             
@@ -1073,12 +1256,31 @@
 
         // NEW: Sync function for shared inputs (GC & Duration)
         function syncInputs(sourceId, targetId) {
-            const val = document.getElementById(sourceId).value;
-            const target = document.getElementById(targetId);
-            if(target) {
-                target.value = val;
-                calculate(); // Trigger recalc which handles updating both UIs
+            const el = document.getElementById(sourceId);
+            if (!el) return;
+            const val = el.value;
+            // Sync with base (Tab 3)
+            const base = document.getElementById(targetId);
+            if(base) base.value = val;
+            
+            // Sync with RFI (Tab 4)
+            const rfi = document.getElementById(targetId.replace('input-', 'input-rfi-'));
+            if(rfi) rfi.value = val;
+
+            // Sync with Coordination (Tab 5)
+            const coord = document.getElementById(targetId.replace('input-', 'input-coord-'));
+            if(coord) coord.value = val;
+
+            calculate();
+        }
+
+        // NEW: Specific Two-Way Sync for RFI Reduction Target
+        function syncTwoWay(el, otherId) {
+            const other = document.getElementById(otherId);
+            if(other) {
+                other.value = el.value;
             }
+            calculate();
         }
 
         function calculate() {
@@ -1096,15 +1298,15 @@
             if (volInput1) {
                 vol = parseFloat(volInput1.value.replace(/,/g, '')) || 0;
             } else {
-                // Fallback to others if Tab 1 input missing
-                const volInput2 = document.getElementById('input-annual-volume-rework');
-                const volInput3 = document.getElementById('input-annual-volume-schedule');
-                const volInput4 = document.getElementById('input-annual-volume-bidder');
-                const volInput5 = document.getElementById('input-annual-volume-rfi');
-                if (volInput2) vol = parseFloat(volInput2.value.replace(/,/g, '')) || 0;
-                else if (volInput3) vol = parseFloat(volInput3.value.replace(/,/g, '')) || 0;
-                else if (volInput4) vol = parseFloat(volInput4.value.replace(/,/g, '')) || 0;
-                else if (volInput5) vol = parseFloat(volInput5.value.replace(/,/g, '')) || 0;
+                // Fallback scan
+                const ids = ['input-annual-volume-rework', 'input-annual-volume-schedule', 'input-annual-volume-rfi', 'input-annual-volume-coord', 'input-annual-volume-bidder'];
+                for (let id of ids) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        vol = parseFloat(el.value.replace(/,/g, '')) || 0;
+                        break;
+                    }
+                }
             }
 
             // --- Safety Logic ---
@@ -1221,6 +1423,8 @@
             if (document.getElementById('val-rfi-error')) document.getElementById('val-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-rfi-mult')) document.getElementById('val-rfi-mult').innerText = rfiMult + 'x';
             if (document.getElementById('val-rfi-improve')) document.getElementById('val-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
+            // Sync Bubble on Coordination Tab
+            if (document.getElementById('val-coord-rfi-improve')) document.getElementById('val-coord-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
 
             if (document.getElementById('display-rfi-savings')) document.getElementById('display-rfi-savings').innerText = toCurrency(state.rfi);
             if (document.getElementById('display-rfi-count')) document.getElementById('display-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
@@ -1228,12 +1432,53 @@
 
             if (document.getElementById('narrative-rfi-error')) document.getElementById('narrative-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-rfi-critical')) document.getElementById('narrative-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
-            if (document.getElementById('narrative-rfi-count')) document.getElementById('narrative-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
-            if (document.getElementById('narrative-rfi-burn')) document.getElementById('narrative-rfi-burn').innerText = toCurrency(dailyBurn);
-            if (document.getElementById('narrative-rfi-mult')) document.getElementById('narrative-rfi-mult').innerText = rfiMult + 'x';
-            if (document.getElementById('narrative-rfi-cost')) document.getElementById('narrative-rfi-cost').innerText = toCurrency(costPerImpact);
-            if (document.getElementById('narrative-rfi-improve')) document.getElementById('narrative-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
-            if (document.getElementById('narrative-rfi-savings')) document.getElementById('narrative-rfi-savings').innerText = toCurrency(state.rfi);
+            // --- Coordination Logic (UPDATED) ---
+            const coordGcPct = getVal('input-coord-gc') / 100;
+            const coordDuration = getVal('input-coord-duration');
+            const coordCriticalPct = getVal('input-coord-critical') / 100;
+            const coordClashPct = getVal('input-coord-clash') / 100;
+            const coordMult = getVal('input-coord-mult');
+            const coordImprove = getVal('input-coord-improve') / 100; // VDC Savings %
+            const coordRfiImprove = getVal('input-coord-rfi-improve') / 100; // RFI Reduction %
+
+            // 1. Exposure Calculation (Bottom Up - RFI based)
+            const coordTotalGcCost = vol * coordGcPct;
+            const coordDurationDays = coordDuration * 30;
+            const coordDailyBurn = coordDurationDays > 0 ? coordTotalGcCost / coordDurationDays : 0;
+            const coordCostPerClash = coordDailyBurn * coordMult;
+            
+            const baseIssues = (vol / 1000000) * 10;
+            const criticalClashes = baseIssues * coordClashPct * coordCriticalPct;
+            const totalClashExposure = criticalClashes * coordCostPerClash;
+
+            // 2. Savings Calculation
+            // Part A: VDC Savings (Volume * %)
+            const vdcSavings = vol * coordImprove;
+            
+            // Part B: RFI/Clash Reduction Savings (Exposure * RFI Reduction Target)
+            const rfiClashSavings = totalClashExposure * coordRfiImprove;
+
+            // Total Combined Savings
+            state.coordination = vdcSavings + rfiClashSavings;
+
+            // UI Updates - Coordination
+            if (document.getElementById('val-coord-gc')) document.getElementById('val-coord-gc').innerText = (coordGcPct * 100).toFixed(1) + '%';
+            if (document.getElementById('val-coord-duration')) document.getElementById('val-coord-duration').innerText = coordDuration;
+            if (document.getElementById('val-coord-critical')) document.getElementById('val-coord-critical').innerText = (coordCriticalPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-coord-clash')) document.getElementById('val-coord-clash').innerText = (coordClashPct * 100).toFixed(0) + '%';
+            if (document.getElementById('val-coord-mult')) document.getElementById('val-coord-mult').innerText = coordMult + 'x';
+            if (document.getElementById('val-coord-improve')) document.getElementById('val-coord-improve').innerText = (coordImprove * 100).toFixed(1) + '%';
+
+            if (document.getElementById('display-coord-savings')) document.getElementById('display-coord-savings').innerText = toCurrency(state.coordination);
+            if (document.getElementById('display-coord-exposure')) document.getElementById('display-coord-exposure').innerText = toCurrency(totalClashExposure);
+            if (document.getElementById('display-coord-cost')) document.getElementById('display-coord-cost').innerText = toCurrency(coordCostPerClash);
+
+            if (document.getElementById('narrative-coord-clash')) document.getElementById('narrative-coord-clash').innerText = (coordClashPct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-coord-critical')) document.getElementById('narrative-coord-critical').innerText = (coordCriticalPct * 100).toFixed(0) + '%';
+            if (document.getElementById('narrative-coord-cost')) document.getElementById('narrative-coord-cost').innerText = toCurrency(coordCostPerClash);
+            if (document.getElementById('narrative-coord-exposure')) document.getElementById('narrative-coord-exposure').innerText = toCurrency(totalClashExposure);
+            if (document.getElementById('narrative-coord-improve')) document.getElementById('narrative-coord-improve').innerText = (coordImprove * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-coord-savings')) document.getElementById('narrative-coord-savings').innerText = toCurrency(state.coordination);
 
             // --- Bidder Selection Logic ---
             const bidLowPct = getVal('input-bid-low') / 100;
@@ -1275,17 +1520,19 @@
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
             const rfTog = document.getElementById('toggle-rfi');
+            const cTog = document.getElementById('toggle-coordination');
             const bTog = document.getElementById('toggle-bidder');
             
             const sOn = sTog ? sTog.checked : true;
             const rOn = rTog ? rTog.checked : true;
             const scOn = scTog ? scTog.checked : true;
             const rfOn = rfTog ? rfTog.checked : true;
+            const cOn = cTog ? cTog.checked : true;
             const bOn = bTog ? bTog.checked : true;
 
-            const savingsY1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0) + (rfOn ? state.rfi : 0) + (bOn ? state.bidder : 0);
-            const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0) + (rfOn ? state.rfi * 1.1 : 0) + (bOn ? state.bidder * 1.1 : 0);
-            const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0) + (rfOn ? state.rfi * 1.25 : 0) + (bOn ? state.bidder * 1.25 : 0);
+            const savingsY1 = (sOn ? state.safety : 0) + (rOn ? state.rework : 0) + (scOn ? state.schedule : 0) + (rfOn ? state.rfi : 0) + (cOn ? state.coordination : 0) + (bOn ? state.bidder : 0);
+            const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0) + (rfOn ? state.rfi * 1.1 : 0) + (cOn ? state.coordination * 1.1 : 0) + (bOn ? state.bidder * 1.1 : 0);
+            const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0) + (rfOn ? state.rfi * 1.25 : 0) + (cOn ? state.coordination * 1.25 : 0) + (bOn ? state.bidder * 1.25 : 0);
 
             // Investments
             const investAnnual = getVal('input-invest-annual');
@@ -1322,12 +1569,14 @@
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
             const rfTog = document.getElementById('toggle-rfi');
+            const cTog = document.getElementById('toggle-coordination');
             const bTog = document.getElementById('toggle-bidder');
             
             const sOn = sTog ? sTog.checked : true;
             const rOn = rTog ? rTog.checked : true;
             const scOn = scTog ? scTog.checked : true;
             const rfOn = rfTog ? rfTog.checked : true;
+            const cOn = cTog ? cTog.checked : true;
             const bOn = bTog ? bTog.checked : true;
 
             // Prepare datasets conditionally
@@ -1387,6 +1636,17 @@
                     label: 'RFI Reduction', 
                     data: [state.rfi, state.rfi * 1.1, state.rfi * 1.25], 
                     backgroundColor: '#8d6e5b', 
+                    borderRadius: 6,
+                    yAxisID: 'y',
+                    order: 1
+                });
+            }
+            if (cOn) {
+                // Coordination: #cec4a1
+                datasets.push({ 
+                    label: 'Coordination', 
+                    data: [state.coordination, state.coordination * 1.1, state.coordination * 1.25], 
+                    backgroundColor: '#cec4a1', 
                     borderRadius: 6,
                     yAxisID: 'y',
                     order: 1

@@ -26,7 +26,6 @@
         }
 
         body { 
-            /* Prioritize Google Sans if available locally, otherwise use Inter */
             font-family: 'Google Sans', 'Inter', sans-serif; 
             background-color: var(--procore-offwhite);
             color: var(--procore-black);
@@ -443,21 +442,26 @@
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
+                                    <!-- Bubble Style -->
                                     <span id="val-gc-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
                                 </div>
                                 <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
+                                <!-- Fixed ID sync here -->
                                 <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-gc-pct', 'input-gc-pct')">
                             </div>
                             <div>
                                 <div class="flex justify-between items-end mb-2">
                                     <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
+                                    <!-- Bubble Style -->
                                     <span id="val-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
                                 </div>
+                                <!-- Fixed ID sync here -->
                                 <input type="range" id="input-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-duration', 'input-duration')">
                             </div>
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
+                                    <!-- Bubble Style -->
                                     <span id="val-slippage" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">15%</span>
                                 </div>
                                 <p class="text-xs text-slate-400 mb-3">72% of projects are delayed 38% on average</p>
@@ -556,24 +560,36 @@
                             </div>
 
                             <div>
-                                <div class="flex justify-between mb-1">
+                                <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
                                     <span id="val-rfi-gc" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
                                 </div>
                                 <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
-                                <input type="range" id="input-rfi-gc" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-rfi-gc', 'input-gc-pct')">
+                                <!-- Fixed ID -->
+                                <input type="range" id="input-rfi-gc-pct" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-rfi-gc-pct', 'input-gc-pct')">
                             </div>
 
                             <div>
-                                <div class="flex justify-between mb-2">
+                                <div class="flex justify-between items-end mb-2">
                                     <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
                                     <span id="val-rfi-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
                                 </div>
+                                <!-- Fixed ID -->
                                 <input type="range" id="input-rfi-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-rfi-duration', 'input-duration')">
                             </div>
 
+                            <!-- NEW: Exposed Hidden RFI Assumption -->
                             <div>
-                                <div class="flex justify-between mb-1">
+                                <div class="flex justify-between items-end mb-1">
+                                    <label class="text-sm font-semibold text-gray-600">Baseline RFI Frequency</label>
+                                    <span id="val-rfi-base-freq" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">10</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mb-3">Per $1M Volume (Industry Avg: 10)</p>
+                                <input type="range" id="input-rfi-base-freq" min="5" max="30" step="1" value="10">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">% of Critical Path RFIs</label>
                                     <span id="val-rfi-critical" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">20%</span>
                                 </div>
@@ -582,7 +598,7 @@
                             </div>
 
                             <div>
-                                <div class="flex justify-between mb-1">
+                                <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">RFI % from field errors</label>
                                     <span id="val-rfi-error" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">30%</span>
                                 </div>
@@ -591,7 +607,7 @@
                             </div>
 
                             <div>
-                                <div class="flex justify-between mb-1">
+                                <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">Rework Cost (GC Multiplier)</label>
                                     <span id="val-rfi-mult" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">10x</span>
                                 </div>
@@ -600,7 +616,7 @@
                             </div>
 
                             <div class="pt-4 border-t">
-                                <div class="flex justify-between mb-1">
+                                <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-emerald-700">RFI Reduction Target</label>
                                     <span id="val-rfi-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">15%</span>
                                 </div>
@@ -768,8 +784,6 @@
                     <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
                         <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
                         <p><span class="font-bold text-slate-600">ROI of BIM/Clash Detection:</span> <a href="https://ascelibrary.org/doi/10.1061/%28ASCE%29LM.1943-5630.0000127#core-collateral-c10" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">ASCE Library - ROI of BIM for Clash Detection</a></p>
-                        <p><span class="font-bold text-slate-600">RFI Cost Analysis:</span> <a href="https://www.constructionjunkie.com/blog/2015/9/7/the-cost-of-rfis-and-best-practices-for-construction-professionals#:~:text=The%20Navigant%20Construction%20Forum%20and,The%20group%20analyzed%20over%201%2C300" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Navigant Construction Forum (Construction Junkie)</a></p>
-                        <p><span class="font-bold text-slate-600">Delay Claims:</span> AACE International Recommended Practice No. 38R-06: "Documenting Evidence for Delay Claims."</p>
                     </div>
                 </div>
             </section>
@@ -1200,12 +1214,13 @@
             if (document.getElementById('narrative-sched-savings')) document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
 
             // --- RFI Logic ---
+            const rfiBaseFreq = getVal('input-rfi-base-freq'); // NEW exposed input
             const rfiCriticalPct = getVal('input-rfi-critical') / 100;
             const rfiErrorPct = getVal('input-rfi-error') / 100;
             const rfiMult = getVal('input-rfi-mult');
             const rfiImprove = getVal('input-rfi-improve') / 100;
 
-            const baseRFIs = (vol / 1000000) * 10;
+            const baseRFIs = (vol / 1000000) * rfiBaseFreq;
             const criticalFieldRFIs = baseRFIs * rfiErrorPct * rfiCriticalPct;
             const costPerImpact = dailyBurn * rfiMult;
             const totalRFIExposure = criticalFieldRFIs * costPerImpact;
@@ -1213,6 +1228,7 @@
 
             if (document.getElementById('val-rfi-gc')) document.getElementById('val-rfi-gc').innerText = (gcPct * 100).toFixed(1) + '%';
             if (document.getElementById('val-rfi-duration')) document.getElementById('val-rfi-duration').innerText = durationMo;
+            if (document.getElementById('val-rfi-base-freq')) document.getElementById('val-rfi-base-freq').innerText = rfiBaseFreq;
             if (document.getElementById('val-rfi-critical')) document.getElementById('val-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-rfi-error')) document.getElementById('val-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-rfi-mult')) document.getElementById('val-rfi-mult').innerText = rfiMult + 'x';

@@ -154,7 +154,7 @@
                 RFI Response Reduction
             </button>
             <button onclick="switchTab('coordination')" id="tab-coordination" class="text-left px-4 py-3 rounded-xl transition-all text-xs tracking-wide tab-inactive">
-                Coordination Resolution
+                Coordination Improvement
             </button>
             <button onclick="switchTab('bidder')" id="tab-bidder" class="text-left px-4 py-3 rounded-xl transition-all text-xs tracking-wide tab-inactive">
                 Bidder Selection Improvement
@@ -200,313 +200,26 @@
 
                         <div>
                             <div class="flex justify-between items-end mb-1">
-                                <!-- Updated label styling to match Tab 2 -->
-                                <label class="text-sm font-semibold text-gray-600">Estimated SG&A</label>
-                                <!-- Updated bubble text color to Orange -->
-                                <span id="label-sga-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">7%</span>
+                                <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-gc-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
                             </div>
-                            <p class="text-xs text-slate-400 mb-3">Typical range of 10% to 12%</p>
-                            <!-- Removed class="slider-black" to use default orange -->
-                            <input id="input-sga-pct" type="range" min="0.01" max="0.20" step="0.01" value="0.07">
+                            <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
+                            <!-- Added oninput to sync with other tabs -->
+                            <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-gc-pct', 'input-gc-pct')">
                         </div>
-
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
+                                <!-- Bubble Style -->
+                                <span id="val-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
+                            </div>
+                            <!-- Added oninput to sync with other tabs -->
+                            <input type="range" id="input-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-duration', 'input-duration')">
+                        </div>
                         <div>
                             <div class="flex justify-between items-end mb-1">
-                                <!-- Updated label styling to match Tab 2 -->
-                                <label class="text-sm font-semibold text-gray-600">Labor Cost %</label>
-                                <span id="label-labor-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">25%</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mb-3">25% average for subcontracted. 35% average for self perform</p>
-                            <input id="input-labor-pct" type="range" min="0.1" max="0.6" step="0.01" value="0.25">
-                        </div>
-
-                        <div class="pt-4 border-t">
-                            <div class="flex justify-between items-end mb-4">
-                                <label class="text-sm font-bold text-emerald-700">Safety Improvement</label>
-                                <span id="label-reduction-pct" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
-                            </div>
-                            <!-- Updated min to 0.01 (1%) -->
-                            <input id="input-reduction-pct" type="range" min="0.01" max="0.4" step="0.01" value="0.10" class="slider-emerald">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Benchmarks -->
-                    <div class="bg-[#1A1A1A] text-white p-8 rounded-3xl shadow-lg">
-                        <div class="flex items-center gap-2 mb-8">
-                            <i data-lucide="bar-chart-3" size="18" class="text-[#D95D2A]"></i>
-                            <h4 class="text-xs font-black uppercase tracking-widest text-[#D95D2A]">Benchmarks</h4>
-                        </div>
-                        <div class="space-y-8">
-                            <div>
-                                <div class="flex justify-between items-end mb-3">
-                                    <label class="text-xs font-bold text-[#EAE3D9]">TRIR Benchmark</label>
-                                    <span id="label-trir-value" class="text-xs font-black px-2 py-0.5 bg-[#D95D2A] rounded text-white">2.3</span>
-                                </div>
-                                <input id="input-trir-value" type="range" min="0.5" max="3.0" step="0.1" value="2.3" class="slider-black">
-                            </div>
-                            <div>
-                                <div class="flex justify-between items-end mb-3">
-                                    <label class="text-xs font-bold text-[#EAE3D9]">Cost per Recordable</label>
-                                    <span id="label-cost-recordable" class="text-xs font-black px-2 py-0.5 bg-[#D95D2A] rounded text-white">$43k</span>
-                                </div>
-                                <input id="input-cost-recordable" type="range" min="10000" max="90000" step="1000" value="43000" class="slider-black">
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-                <main class="lg:col-span-8 flex flex-col justify-between">
-                    <div class="space-y-8">
-                        <!-- Summary Metrics Hero Card -->
-                        <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
-                            <div class="relative z-10">
-                                <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Target Annual Savings</p>
-                                <h2 id="display-annual-savings" class="text-6xl font-black mb-4">$0</h2>
-                                <p class="text-white/80 max-w-md text-sm leading-relaxed">
-                                    Reducing incident frequency lowers direct insurance liabilities, administrative burden, and lost labor productivity.
-                                </p>
-                            </div>
-                            <!-- Changed watermark to Hard Hat for construction safety focus -->
-                            <i data-lucide="hard-hat" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
-                        </div>
-
-                        <!-- Secondary Metrics Grid -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                                <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Estimated Field FTEs</p>
-                                <p id="display-ftes" class="text-3xl font-black text-slate-800">0</p>
-                            </div>
-                            <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                                <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Predicted Recordables</p>
-                                <p id="display-incidents" class="text-3xl font-black text-slate-800">0</p>
-                            </div>
-                        </div>
-
-                        <!-- Executive ROI Narrative -->
-                        <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
-                            <div class="p-8 md:p-12">
-                                <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Safety ROI Narrative</h3>
-                                <div class="space-y-12 relative">
-                                    <div class="flex gap-8 items-start relative z-10">
-                                        <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
-                                        <div>
-                                            <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Resource Allocation</h4>
-                                            <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                                With an annual volume of <span id="narrative-volume" class="font-bold text-[#D95D2A]">$0</span> and labor allocation of <span id="narrative-labor-pct" class="font-bold text-[#D95D2A]">25%</span>, <span class="company-name-text">JHL Constructors</span> manages approximately <span id="narrative-labor-cost" class="font-bold text-[#D95D2A]">$0</span> in field labor spend.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-8 items-start relative z-10">
-                                        <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
-                                        <div>
-                                            <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Liability Exposure</h4>
-                                            <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                                Accounting for <span id="narrative-sga-pct" class="font-bold text-[#1A1A1A]">7%</span> overhead and a TRIR of <span id="narrative-trir" class="font-bold text-[#1A1A1A]">2.3</span>, your sites carry an inherent liability of <span id="narrative-total-liability" class="font-black text-[#D95D2A]">$0</span> per year.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
-                                        <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="trending-up" size="32"></i></div>
-                                        <div>
-                                            <h4 class="text-2xl font-black text-emerald-900 leading-tight">Projected Annual Capture</h4>
-                                            <p class="text-emerald-700 mt-1">Driving a <span id="narrative-reduction-pct" class="font-black underline decoration-4 decoration-emerald-200">10%</span> incident reduction recovers:</p>
-                                            <div id="narrative-annual-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
-                                        </div>
-                                    </div>
-                                    <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footnotes for Tab 1 -->
-                    <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
-                        <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
-                        <p>
-                            <span class="font-bold text-slate-600">Estimated FTEs:</span> Derived from field labor spend. 
-                            <a href="https://constructioncoverage.com/glossary/labor-burden" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Coverage Labor Burden</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">Labor Cost Benchmarks:</span> Average provided by 
-                            <a href="https://www.ciranalytics.com/clma" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Construction Labor Market Analyzer</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">SG&A Benchmarks:</span> 
-                            <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">TRIR Benchmark:</span> Based on industry incidence rates. 
-                            <a href="https://www.bls.gov/iif/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Bureau of Labor Statistics (BLS)</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">Cost per Recordable:</span> Average cost per medically consulted injury. 
-                            <a href="https://injuryfacts.nsc.org/work/costs/work-injury-costs/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">National Safety Council (NSC) Injury Facts</a>
-                        </p>
-                    </div>
-                </main>
-            </section>
-
-            <!-- Tab 2: Rework Reduction -->
-            <section id="content-rework" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="wrench" class="w-5 h-5 text-[#D95D2A]"></i> Rework Variables</h2>
-                        <div class="space-y-8">
-                            
-                            <!-- NEW Annual Volume Input for Tab 2 -->
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
-                                <div class="relative rounded-2xl">
-                                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
-                                    <input id="input-annual-volume-rework" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Total Rework % of Volume</label>
-                                    <span id="val-rw-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">2.5%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">12% average. Ranges from 2% to 20%</p>
-                                <input type="range" id="input-rw-pct" min="0.5" max="15" step="0.1" value="2.5">
-                            </div>
-                            
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable</label>
-                                    <span id="val-rw-non" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">70% average</p>
-                                <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
-                            </div>
-
-                            <div class="pt-4 border-t">
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
-                                    <span id="val-rw-red" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">5.0%</span>
-                                </div>
-                                <input type="range" id="input-rw-red" min="1" max="25" step="1" value="5.0" class="slider-emerald">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-8 space-y-8">
-                    <!-- Hero Card: Annual Profit Recovery (Green) -->
-                    <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
-                        <div class="relative z-10">
-                            <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Annual Profit Recovery</p>
-                            <h2 id="display-rw-savings" class="text-6xl font-black mb-4">$0</h2>
-                            <p class="text-white/80 max-w-md text-sm leading-relaxed">
-                                Mitigating direct rework costs through automated QA/QC, real-time field visibility, and integrated coordination workflows.
-                            </p>
-                        </div>
-                        <i data-lucide="trending-up" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-1">Liability Exposure</p>
-                            <p id="display-rw-exposure" class="text-3xl font-black text-slate-800">$0</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-1">Profit Margin Impact</p>
-                            <p id="display-rw-profit" class="text-3xl font-black text-emerald-600">+0.00%</p>
-                        </div>
-                    </div>
-
-                    <!-- Rework ROI Narrative -->
-                    <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
-                        <div class="p-8 md:p-12">
-                            <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Rework ROI Narrative</h3>
-                            <div class="space-y-12 relative">
-                                <!-- Step 1 -->
-                                <div class="flex gap-8 items-start relative z-10">
-                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
-                                    <div>
-                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Financial Footprint</h4>
-                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                            Based on an annual construction volume of <span id="narrative-rw-vol" class="font-bold text-[#D95D2A]">$0</span> and an estimated rework rate of <span id="narrative-rw-pct" class="font-bold text-[#D95D2A]">2.5%</span>, your total rework volume is approximately <span id="narrative-rw-total" class="font-bold text-[#D95D2A]">$0</span>.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- Step 2 -->
-                                <div class="flex gap-8 items-start relative z-10">
-                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
-                                    <div>
-                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Profit Leak</h4>
-                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                            Accounting for a <span id="narrative-rw-non" class="font-bold text-[#1A1A1A]">70%</span> nonrecoverable rate, <span class="company-name-text">JHL Constructors</span> absorbs <span id="narrative-rw-exposure" class="font-black text-[#D95D2A]">$0</span> in annual direct profit erosion.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- Step 3 -->
-                                <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
-                                    <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="check-circle" size="32"></i></div>
-                                    <div>
-                                        <h4 class="text-2xl font-black text-emerald-900 leading-tight">Net Capital Recovery</h4>
-                                        <p class="text-emerald-700 mt-1">Driving a <span id="narrative-rw-red" class="font-black underline decoration-4 decoration-emerald-200">5%</span> improvement in quality capture recovers:</p>
-                                        <div id="narrative-rw-savings" class="text-4xl font-black text-emerald-600 mt-3">$0</div>
-                                    </div>
-                                </div>
-                                <div class="absolute left-6 top-6 bottom-32 w-1 bg-[#EAE3D9] -z-0 rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footnotes for Tab 2 -->
-                    <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
-                        <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
-                        <p>
-                            <span class="font-bold text-slate-600">Total Rework % of Volume:</span> Benchmarks for rework cost relative to Total Installed Cost. 
-                            <a href="https://becht.com/becht-blog/entry/measuring-construction-rework-delays-in-sustaining-capital-projects/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Becht Engineering Analysis</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">Estimated Nonrecoverable:</span> Portion of rework costs not recoverable via insurance/back-charges. 
-                            <a href="https://www.procore.com/ebooks/global-state-of-preconstruction" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Procore Global State of Preconstruction</a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab 3: GC Overrun Reduction -->
-            <section id="content-schedule" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <!-- Changed icon text color to Orange -->
-                        <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-[#D95D2A]"></i> GC Overrun Variables</h2>
-                        <div class="space-y-8">
-                            
-                            <!-- NEW Annual Volume Input for Tab 3 -->
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
-                                <div class="relative rounded-2xl">
-                                    <!-- Changed $ color and focus border to Orange -->
-                                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
-                                    <input id="input-annual-volume-schedule" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-gc-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
-                                <input type="range" id="input-gc-pct" min="1" max="15" step="0.5" value="8">
-                            </div>
-                            <div>
-                                <div class="flex justify-between items-end mb-2">
-                                    <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
-                                </div>
-                                <input type="range" id="input-duration" min="6" max="36" step="1" value="12">
-                            </div>
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
+                                <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
                                     <!-- Bubble Style -->
                                     <span id="val-slippage" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">15%</span>
                                 </div>
@@ -1072,18 +785,18 @@
                     <input type="checkbox" id="toggle-rfi" class="sr-only peer" checked onchange="calculate(); renderChart();">
                     <!-- Updated to #8d6e5b -->
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#8d6e5b]"></div>
-                    <span class="ms-3 text-sm font-bold text-gray-700">RFI Reduction</span>
+                    <span class="ms-3 text-sm font-bold text-gray-700">RFI Response Reduction</span>
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-coordination" class="sr-only peer" checked onchange="calculate(); renderChart();">
                     <!-- Updated to #cec4a1 -->
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#cec4a1]"></div>
-                    <span class="ms-3 text-sm font-bold text-gray-700">Coordination</span>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Coordination Improvement</span>
                 </label>
                 <label class="inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="toggle-bidder" class="sr-only peer" checked onchange="calculate(); renderChart();">
                     <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#566578]"></div>
-                    <span class="ms-3 text-sm font-bold text-gray-700">Bidder Selection</span>
+                    <span class="ms-3 text-sm font-bold text-gray-700">Bidder Selection Improvement</span>
                 </label>
             </div>
 
@@ -1597,7 +1310,7 @@
             if (rfOn) {
                 // RFI: #8d6e5b
                 datasets.push({ 
-                    label: 'RFI Reduction', 
+                    label: 'RFI Response Reduction', 
                     data: [state.rfi, state.rfi * 1.1, state.rfi * 1.25], 
                     backgroundColor: '#8d6e5b', 
                     borderRadius: 6,
@@ -1608,7 +1321,7 @@
             if (cOn) {
                 // Coordination: #cec4a1
                 datasets.push({ 
-                    label: 'Coordination', 
+                    label: 'Coordination Improvement', 
                     data: [state.coordination, state.coordination * 1.1, state.coordination * 1.25], 
                     backgroundColor: '#cec4a1', 
                     borderRadius: 6,
@@ -1619,7 +1332,7 @@
             if (bOn) {
                 // Bidder: #566578
                 datasets.push({ 
-                    label: 'Bidder Selection', 
+                    label: 'Bidder Selection Improvement', 
                     data: [state.bidder, state.bidder * 1.1, state.bidder * 1.25], 
                     backgroundColor: '#566578', 
                     borderRadius: 6,

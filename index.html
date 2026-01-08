@@ -182,57 +182,56 @@
         <main id="main-content-area" class="flex-1 py-10 pl-0 lg:pl-10">
             
             <!-- Tab 1: Safety ROI -->
-            <section id="content-safety" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- ... existing content ... -->
-                <aside class="lg:col-span-4 space-y-6">
-                    <!-- Main Inputs -->
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <div class="flex items-center gap-2 mb-8">
-                            <div class="p-1.5 bg-[#EAE3D9] rounded-lg text-[#D95D2A]">
-                                <i data-lucide="hard-hat" size="18"></i>
+        <section id="content-safety" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <aside class="lg:col-span-4 space-y-6">
+                <!-- Main Inputs -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
+                    <!-- Updated Header Style to match Tab 2 -->
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="hard-hat" class="w-5 h-5 text-[#D95D2A]"></i> Incident Variables</h2>
+                    
+                    <div class="space-y-10">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                             </div>
-                            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400">Safety Inputs</h3>
                         </div>
-                        
-                        <div class="space-y-10">
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
-                                <div class="relative rounded-2xl">
-                                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
-                                    <input id="input-annual-volume" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
-                                </div>
-                            </div>
 
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-bold text-slate-700">Estimated SG&A</label>
-                                    <span id="label-sga-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#1A1A1A] rounded-full text-xs font-extrabold">7%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">Typical range of 10% to 12%</p>
-                                <input id="input-sga-pct" type="range" min="0.01" max="0.20" step="0.01" value="0.07" class="slider-black">
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <!-- Updated label styling to match Tab 2 -->
+                                <label class="text-sm font-semibold text-gray-600">Estimated SG&A</label>
+                                <!-- Updated bubble text color to Orange -->
+                                <span id="label-sga-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">7%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">Typical range of 10% to 12%</p>
+                            <!-- Removed class="slider-black" to use default orange -->
+                            <input id="input-sga-pct" type="range" min="0.01" max="0.20" step="0.01" value="0.07">
+                        </div>
 
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-bold text-slate-700">Labor Cost %</label>
-                                    <span id="label-labor-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">25%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">25% average for subcontracted. 35% average for self perform</p>
-                                <input id="input-labor-pct" type="range" min="0.1" max="0.6" step="0.01" value="0.25">
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <!-- Updated label styling to match Tab 2 -->
+                                <label class="text-sm font-semibold text-gray-600">Labor Cost %</label>
+                                <span id="label-labor-pct" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">25%</span>
                             </div>
+                            <p class="text-xs text-slate-400 mb-3">25% average for subcontracted. 35% average for self perform</p>
+                            <input id="input-labor-pct" type="range" min="0.1" max="0.6" step="0.01" value="0.25">
+                        </div>
 
-                            <div class="pt-4 border-t">
-                                <div class="flex justify-between items-end mb-4">
-                                    <label class="text-sm font-bold text-emerald-700">Safety Improvement</label>
-                                    <span id="label-reduction-pct" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
-                                </div>
-                                <!-- Updated min to 0.01 (1%) -->
-                                <input id="input-reduction-pct" type="range" min="0.01" max="0.4" step="0.01" value="0.10" class="slider-emerald">
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-end mb-4">
+                                <label class="text-sm font-bold text-emerald-700">Safety Improvement</label>
+                                <span id="label-reduction-pct" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
                             </div>
+                            <!-- Updated min to 0.01 (1%) -->
+                            <input id="input-reduction-pct" type="range" min="0.01" max="0.4" step="0.01" value="0.10" class="slider-emerald">
                         </div>
                     </div>
+                </div>
 
-                    <!-- Benchmarks -->
+                <!-- Benchmarks -->
                     <div class="bg-[#1A1A1A] text-white p-8 rounded-3xl shadow-lg">
                         <div class="flex items-center gap-2 mb-8">
                             <i data-lucide="bar-chart-3" size="18" class="text-[#D95D2A]"></i>
@@ -792,25 +791,6 @@
                             </div>
                         </div>
 
-                        <!-- General Conditions % (Synced) -->
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
-                                <span id="val-coord-gc" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mb-3">Range of 6% to 12%</p>
-                            <input type="range" id="input-coord-gc" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-coord-gc', 'input-gc-pct')">
-                        </div>
-
-                        <!-- Avg Project Duration (Synced) -->
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
-                                <span id="val-coord-duration" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">12</span>
-                            </div>
-                            <input type="range" id="input-coord-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-coord-duration', 'input-duration')">
-                        </div>
-
                         <!-- Clash Detection Savings Target -->
                         <div class="pt-4 border-t">
                             <div class="flex justify-between items-end mb-1">
@@ -903,145 +883,138 @@
         </section>
 
         <!-- Tab 3.5: Bidder Selection Improvement (Renamed ID internally to keep order logic simple, but visually positioned after) -->
-            <section id="content-bidder" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <!-- Changed icon text color to Orange -->
-                        <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-[#D95D2A]"></i> Bidder Variables</h2>
-                        <div class="space-y-8">
-                            
-                            <!-- Synced Volume Input -->
-                            <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
-                                <div class="relative rounded-2xl">
-                                    <!-- Changed $ color and focus border to Orange -->
-                                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
-                                    <input id="input-annual-volume-bidder" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
-                                </div>
+        <section id="content-bidder" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
+                    <!-- Changed icon text color to Orange -->
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-[#D95D2A]"></i> Bidder Variables</h2>
+                    <div class="space-y-8">
+                        
+                        <!-- Synced Volume Input -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
+                            <div class="relative rounded-2xl">
+                                <!-- Changed $ color and focus border to Orange -->
+                                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
+                                <input id="input-annual-volume-bidder" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                             </div>
-
-                            <!-- Low Bidder Selection -->
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Low Bidder Selection %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-bid-low" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">50% Average</p>
-                                <input type="range" id="input-bid-low" min="25" max="100" step="5" value="50">
-                            </div>
-
-                            <!-- Project Dispute % -->
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Project Dispute %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-bid-dispute" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">70% Average</p>
-                                <input type="range" id="input-bid-dispute" min="0" max="100" step="5" value="70">
-                            </div>
-
-                            <!-- Initial Dispute Value -->
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Initial Dispute Value %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-bid-initial" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">Average 8% of Project Value</p>
-                                <input type="range" id="input-bid-initial" min="1" max="20" step="0.5" value="8">
-                            </div>
-
-                            <!-- Typical Settlement -->
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Typical Settlement %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-bid-settle" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">2%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">Average 2% of Project Value</p>
-                                <input type="range" id="input-bid-settle" min="0.5" max="10" step="0.5" value="2">
-                            </div>
-
-                            <!-- Recovery Rate -->
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Recovery Rate %</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-bid-recover" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">Average 50% of Claimed Amount</p>
-                                <input type="range" id="input-bid-recover" min="0" max="100" step="5" value="50">
-                            </div>
-
-                            <!-- Improvement Target -->
-                            <div class="pt-4 border-t">
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-emerald-700">Bidder Selection Improvement</label>
-                                    <span id="val-bid-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
-                                </div>
-                                <input type="range" id="input-bid-improve" min="1" max="30" step="1" value="10" class="slider-emerald">
-                            </div>
-
                         </div>
+
+                        <!-- Low Bidder Selection -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Low Bidder Selection %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-low" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">50% Average</p>
+                            <input type="range" id="input-bid-low" min="25" max="100" step="5" value="50">
+                        </div>
+
+                        <!-- Project Dispute % -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <!-- Renamed to Frequency -->
+                                <label class="text-sm font-semibold text-gray-600">Project Dispute Frequency</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-dispute" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">70% Average</p>
+                            <input type="range" id="input-bid-dispute" min="0" max="100" step="5" value="70">
+                        </div>
+
+                        <!-- Initial Dispute Value -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Initial Dispute Value %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-initial" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">8%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Average 8% of Project Value</p>
+                            <input type="range" id="input-bid-initial" min="1" max="20" step="0.5" value="8">
+                        </div>
+
+                        <!-- REMOVED "Typical Settlement %" Input as it is now redundant/calculated -->
+
+                        <!-- Recovery Rate -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Recovery Rate %</label>
+                                <!-- Bubble Style -->
+                                <span id="val-bid-recover" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-3">Average 50% of Claimed Amount</p>
+                            <input type="range" id="input-bid-recover" min="0" max="100" step="5" value="50">
+                        </div>
+
+                        <!-- Improvement Target -->
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-emerald-700">Bidder Selection Improvement</label>
+                                <span id="val-bid-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
+                            </div>
+                            <input type="range" id="input-bid-improve" min="1" max="30" step="1" value="10" class="slider-emerald">
+                        </div>
+
                     </div>
                 </div>
-                
-                <div class="lg:col-span-8 space-y-6">
-                    <!-- Hero Card -->
-                    <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
-                        <div class="relative z-10">
-                            <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Dispute Avoidance Savings</p>
-                            <h2 id="display-bid-savings" class="text-6xl font-black mb-4">$0</h2>
-                            <p class="text-white/80 max-w-md text-sm leading-relaxed">
-                                Improving bidder selection criteria reduces the frequency of low-performing subcontractors, mitigating downstream dispute costs and settlement liabilities.
-                            </p>
-                        </div>
-                        <i data-lucide="users" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
+            </div>
+            
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Hero Card -->
+                <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
+                    <div class="relative z-10">
+                        <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Dispute Avoidance Savings</p>
+                        <h2 id="display-bid-savings" class="text-6xl font-black mb-4">$0</h2>
+                        <p class="text-white/80 max-w-md text-sm leading-relaxed">
+                            Improving bidder selection criteria reduces the frequency of low-performing subcontractors, mitigating downstream dispute costs and settlement liabilities.
+                        </p>
                     </div>
+                    <i data-lucide="users" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
+                </div>
 
-                    <!-- Secondary Metrics -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Dispute Exposure</p>
-                            <p id="display-bid-exposure" class="text-3xl font-black text-slate-800">$0</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
-                            <p class="text-xs font-bold text-gray-400 uppercase mb-1">Settlement Liability</p>
-                            <p id="display-bid-liability" class="text-3xl font-black text-emerald-600">$0</p>
-                        </div>
+                <!-- Secondary Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Dispute Exposure</p>
+                        <p id="display-bid-exposure" class="text-3xl font-black text-slate-800">$0</p>
                     </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
+                        <p class="text-xs font-bold text-gray-400 uppercase mb-1">Settlement Liability</p>
+                        <p id="display-bid-liability" class="text-3xl font-black text-emerald-600">$0</p>
+                        <!-- Added explanation for transparency -->
+                        <p class="text-xs text-slate-400 mt-2">Dispute Exposure × Recovery Rate</p>
+                    </div>
+                </div>
 
-                    <!-- Narrative -->
-                    <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
-                        <div class="p-8 md:p-12">
-                            <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Bidder Selection Narrative</h3>
-                            <div class="space-y-12 relative">
-                                <!-- Step 1 -->
-                                <div class="flex gap-8 items-start relative z-10">
-                                    <!-- Changed text-blue-600 to text-[#D95D2A] -->
-                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
-                                    <div>
-                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Low Bid Risk</h4>
-                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                            <!-- Changed text-blue-600 to text-[#D95D2A] -->
-                                            With <span id="narrative-bid-low" class="font-bold text-[#D95D2A]">50%</span> of volume awarded to low bidders and a <span id="narrative-bid-freq" class="font-bold text-[#D95D2A]">70%</span> dispute frequency, <span class="company-name-text">JHL Constructors</span> faces high exposure to performance-based claims.
-                                        </p>
-                                    </div>
+                <!-- Narrative -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Bidder Selection Narrative</h3>
+                        <div class="space-y-12 relative">
+                            <!-- Step 1 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <!-- Changed text-blue-600 to text-[#D95D2A] -->
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">The Low Bid Risk</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        With <span id="narrative-bid-low" class="font-bold text-[#D95D2A]">50%</span> of volume awarded to low bidders and a <span id="narrative-bid-freq" class="font-bold text-[#D95D2A]">70%</span> dispute frequency, <span class="company-name-text">JHL Constructors</span> faces high exposure to performance-based claims.
+                                    </p>
                                 </div>
-                                <!-- Step 2 -->
-                                <div class="flex gap-8 items-start relative z-10">
-                                    <!-- Changed text-blue-600 to text-[#D95D2A] -->
-                                    <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
-                                    <div>
-                                        <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Cost of Conflict</h4>
-                                        <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
-                                            Initial disputes could total <span id="narrative-bid-initial" class="font-bold text-[#1A1A1A]">$0</span> annually. Factoring in a <span id="narrative-bid-settle-pct" class="font-bold text-[#1A1A1A]">2%</span> settlement cost, the direct bottom-line hit is estimated at <span id="narrative-bid-settle-val" class="font-black text-[#D95D2A]">$0</span> per year.
-                                        </p>
-                                    </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="flex gap-8 items-start relative z-10">
+                                <!-- Changed text-blue-600 to text-[#D95D2A] -->
+                                <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
+                                <div>
+                                    <h4 class="font-black text-[#1A1A1A] text-lg uppercase tracking-tight">Cost of Conflict</h4>
+                                    <p class="text-slate-500 mt-2 leading-relaxed max-w-lg">
+                                        Initial disputes could total <span id="narrative-bid-initial" class="font-bold text-[#1A1A1A]">$0</span> annually. Factoring in a <span id="narrative-bid-recover" class="font-bold text-[#1A1A1A]">50%</span> recovery rate, the direct bottom-line hit is estimated at <span id="narrative-bid-settle-val" class="font-black text-[#D95D2A]">$0</span> per year.
+                                    </p>
                                 </div>
-                                <!-- Step 3 -->
+                            </div>
+                            <!-- Step 3 -->
                                 <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
                                     <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="shield-check" size="32"></i></div>
                                     <div>
@@ -1450,16 +1423,12 @@
             if (document.getElementById('narrative-rfi-savings')) document.getElementById('narrative-rfi-savings').innerText = toCurrency(state.rfi);
 
             // --- Coordination Logic (UPDATED - Simplified) ---
-            const coordGcPct = getVal('input-coord-gc') / 100;
-            const coordDuration = getVal('input-coord-duration');
             const coordImprove = getVal('input-coord-improve') / 100; // VDC Savings %
 
             // Simple Top-Down Calculation: Volume * Improvement %
             state.coordination = vol * coordImprove;
 
             // UI Updates - Coordination
-            if (document.getElementById('val-coord-gc')) document.getElementById('val-coord-gc').innerText = (coordGcPct * 100).toFixed(1) + '%';
-            if (document.getElementById('val-coord-duration')) document.getElementById('val-coord-duration').innerText = coordDuration;
             if (document.getElementById('val-coord-improve')) document.getElementById('val-coord-improve').innerText = (coordImprove * 100).toFixed(1) + '%';
 
             if (document.getElementById('display-coord-savings')) document.getElementById('display-coord-savings').innerText = toCurrency(state.coordination);
@@ -1477,21 +1446,23 @@
             const bidLowPct = getVal('input-bid-low') / 100;
             const bidDisputePct = getVal('input-bid-dispute') / 100;
             const bidInitialPct = getVal('input-bid-initial') / 100;
-            const bidSettlePct = getVal('input-bid-settle') / 100;
+            // Removed bidSettlePct
             const bidRecoverPct = getVal('input-bid-recover') / 100;
             const bidImprovePct = getVal('input-bid-improve') / 100;
 
             const volAtRisk = vol * bidLowPct;
             const disputeVol = volAtRisk * bidDisputePct;
             const totalDisputeValue = disputeVol * bidInitialPct;
-            const settlementLiability = disputeVol * bidSettlePct;
+            
+            // UPDATED CALCULATION: Liability = Dispute Value * Recovery Rate
+            const settlementLiability = totalDisputeValue * bidRecoverPct;
+            
             state.bidder = settlementLiability * bidImprovePct;
 
             // UI Updates - Bidder
             if (document.getElementById('val-bid-low')) document.getElementById('val-bid-low').innerText = (bidLowPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-bid-dispute')) document.getElementById('val-bid-dispute').innerText = (bidDisputePct * 100).toFixed(0) + '%';
             if (document.getElementById('val-bid-initial')) document.getElementById('val-bid-initial').innerText = (bidInitialPct * 100).toFixed(1) + '%';
-            if (document.getElementById('val-bid-settle')) document.getElementById('val-bid-settle').innerText = (bidSettlePct * 100).toFixed(1) + '%';
             if (document.getElementById('val-bid-recover')) document.getElementById('val-bid-recover').innerText = (bidRecoverPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-bid-improve')) document.getElementById('val-bid-improve').innerText = (bidImprovePct * 100).toFixed(0) + '%';
 
@@ -1502,7 +1473,7 @@
             if (document.getElementById('narrative-bid-low')) document.getElementById('narrative-bid-low').innerText = (bidLowPct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-bid-freq')) document.getElementById('narrative-bid-freq').innerText = (bidDisputePct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-bid-initial')) document.getElementById('narrative-bid-initial').innerText = toCurrency(totalDisputeValue);
-            if (document.getElementById('narrative-bid-settle-pct')) document.getElementById('narrative-bid-settle-pct').innerText = (bidSettlePct * 100).toFixed(1) + '%';
+            if (document.getElementById('narrative-bid-recover')) document.getElementById('narrative-bid-recover').innerText = (bidRecoverPct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-bid-settle-val')) document.getElementById('narrative-bid-settle-val').innerText = toCurrency(settlementLiability);
             if (document.getElementById('narrative-bid-improve')) document.getElementById('narrative-bid-improve').innerText = (bidImprovePct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-bid-savings')) document.getElementById('narrative-bid-savings').innerText = toCurrency(state.bidder);

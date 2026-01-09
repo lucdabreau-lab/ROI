@@ -10,10 +10,10 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Fonts: Importing Inter as the best available fallback for Google Sans -->
+    <!-- Fonts: Importing Inter Tight -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -26,8 +26,8 @@
         }
 
         body { 
-            /* Prioritize Google Sans if available locally, otherwise use Inter */
-            font-family: 'Google Sans', 'Inter', sans-serif; 
+            /* Global Font Update to Inter Tight */
+            font-family: 'Inter Tight', sans-serif; 
             background-color: var(--procore-offwhite);
             color: var(--procore-black);
             -webkit-font-smoothing: antialiased;
@@ -327,8 +327,6 @@
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
                         <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="wrench" class="w-5 h-5 text-[#D95D2A]"></i> Rework Variables</h2>
                         <div class="space-y-8">
-                            
-                            <!-- NEW Annual Volume Input for Tab 2 -->
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
                                 <div class="relative rounded-2xl">
@@ -336,7 +334,6 @@
                                     <input id="input-annual-volume-rework" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                                 </div>
                             </div>
-
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">Total Rework % of Volume</label>
@@ -345,7 +342,6 @@
                                 <p class="text-xs text-slate-400 mb-3">12% average. Ranges from 2% to 20%</p>
                                 <input type="range" id="input-rw-pct" min="0.5" max="15" step="0.1" value="2.5">
                             </div>
-                            
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable</label>
@@ -354,7 +350,6 @@
                                 <p class="text-xs text-slate-400 mb-3">70% average</p>
                                 <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
                             </div>
-
                             <div class="pt-4 border-t">
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
@@ -366,7 +361,6 @@
                     </div>
                 </div>
                 <div class="lg:col-span-8 space-y-8">
-                    <!-- Hero Card: Annual Profit Recovery (Green) -->
                     <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
                         <div class="relative z-10">
                             <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Annual Profit Recovery</p>
@@ -389,12 +383,10 @@
                         </div>
                     </div>
 
-                    <!-- Rework ROI Narrative -->
                     <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                         <div class="p-8 md:p-12">
                             <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">Rework ROI Narrative</h3>
                             <div class="space-y-12 relative">
-                                <!-- Step 1 -->
                                 <div class="flex gap-8 items-start relative z-10">
                                     <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
                                     <div>
@@ -404,7 +396,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <!-- Step 2 -->
                                 <div class="flex gap-8 items-start relative z-10">
                                     <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
                                     <div>
@@ -414,7 +405,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <!-- Step 3 -->
                                 <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
                                     <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="check-circle" size="32"></i></div>
                                     <div>
@@ -428,7 +418,6 @@
                         </div>
                     </div>
 
-                    <!-- Footnotes for Tab 2 -->
                     <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
                         <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
                         <p><span class="font-bold text-slate-600">Total Rework % of Volume:</span> Benchmarks for rework cost relative to Total Installed Cost. <a href="https://becht.com/becht-blog/entry/measuring-construction-rework-delays-in-sustaining-capital-projects/" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Becht Engineering Analysis</a></p>
@@ -441,15 +430,11 @@
             <section id="content-schedule" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-4 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <!-- Changed icon text color to Orange -->
                         <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-[#D95D2A]"></i> GC Overrun Variables</h2>
                         <div class="space-y-8">
-                            
-                            <!-- NEW Annual Volume Input for Tab 3 -->
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
                                 <div class="relative rounded-2xl">
-                                    <!-- Changed $ color and focus border to Orange -->
                                     <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
                                     <input id="input-annual-volume-schedule" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                                 </div>
@@ -515,12 +500,10 @@
                         <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
                             <p class="text-xs font-bold text-gray-400 uppercase mb-1">Total Overrun Liability</p>
                             <p id="display-overrun-cost" class="text-3xl font-black text-[#D95D2A]">$0</p>
-                            <!-- Updated description to remove claim risk -->
                             <p class="text-xs text-slate-400 mt-2">Estimated cost of extending General Conditions</p>
                         </div>
                     </div>
 
-                    <!-- Schedule ROI Narrative (NEW ADDITION) -->
                     <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                         <div class="p-8 md:p-12">
                             <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">GC Overrun Reduction Narrative</h3>
@@ -556,15 +539,10 @@
                         </div>
                     </div>
 
-                    <!-- Footnotes for Tab 3 -->
                     <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
                         <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
-                        <p>
-                            <span class="font-bold text-slate-600">General Conditions Benchmarks:</span> 
-                            <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a>
-                        </p>
+                        <p><span class="font-bold text-slate-600">General Conditions Benchmarks:</span> <a href="https://cfma.org/articles/cfma-s-2-24-construction-financial-benchmarker-executive-summary" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">CFMA Financial Benchmarker</a></p>
                     </div>
-
                 </div>
             </section>
 
@@ -572,21 +550,16 @@
             <section id="content-rfi" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-4 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <!-- Changed Violet to Orange -->
                         <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="file-text" class="w-5 h-5 text-[#D95D2A]"></i> RFI Variables</h2>
                         <div class="space-y-8">
-                            
-                            <!-- Synced Volume Input -->
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-3 text-sm">Annual Construction Volume</label>
                                 <div class="relative rounded-2xl">
-                                    <!-- Changed Violet to Orange -->
                                     <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D95D2A] font-bold text-lg">$</span>
                                     <input id="input-annual-volume-rfi" type="text" class="w-full pl-10 pr-6 py-4 bg-[#F9F7F5] border border-[#EAE3D9] rounded-2xl focus:border-[#D95D2A] outline-none font-bold text-lg" value="100,000,000" oninput="formatVolumeInput(this)">
                                 </div>
                             </div>
 
-                            <!-- General Conditions % (Synced with Tab 3) -->
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">General Conditions %</label>
@@ -598,7 +571,6 @@
                                 <input type="range" id="input-rfi-gc-pct" min="1" max="15" step="0.5" value="8" oninput="syncInputs('input-rfi-gc-pct', 'input-gc-pct')">
                             </div>
 
-                            <!-- Avg Project Duration (Synced with Tab 3) -->
                             <div>
                                 <div class="flex justify-between items-end mb-2">
                                     <label class="text-sm font-semibold text-gray-600">Avg Project Duration (Mo)</label>
@@ -661,7 +633,6 @@
                 </div>
                 
                 <div class="lg:col-span-8 space-y-6">
-                    <!-- Hero Card -->
                     <div class="bg-emerald-600 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl">
                         <div class="relative z-10">
                             <p class="text-white/80 font-bold uppercase tracking-widest text-xs mb-2">Critical Path Savings</p>
@@ -673,7 +644,6 @@
                         <i data-lucide="file-text" class="absolute right-[-20px] bottom-[-20px] w-64 h-64 text-white/10 rotate-12"></i>
                     </div>
 
-                    <!-- Secondary Metrics -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white p-8 rounded-2xl border border-slate-200 card-shadow text-center">
                             <p class="text-xs font-bold text-gray-400 uppercase mb-1">Critical Error RFIs</p>
@@ -688,12 +658,10 @@
                         </div>
                     </div>
 
-                    <!-- Narrative -->
                     <div class="bg-white rounded-[2.5rem] border border-slate-200 card-shadow overflow-hidden">
                         <div class="p-8 md:p-12">
                             <h3 class="text-2xl font-black text-[#1A1A1A] mb-12 text-center">RFI Impact Narrative</h3>
                             <div class="space-y-12 relative">
-                                <!-- Step 1 -->
                                 <div class="flex gap-8 items-start relative z-10">
                                     <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">1</div>
                                     <div>
@@ -703,7 +671,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <!-- Step 2 -->
                                 <div class="flex gap-8 items-start relative z-10">
                                     <div class="w-12 h-12 bg-white rounded-2xl border-2 border-[#EAE3D9] flex items-center justify-center font-black text-[#D95D2A] shrink-0 shadow-sm">2</div>
                                     <div>
@@ -713,7 +680,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <!-- Step 3 -->
                                 <div class="bg-emerald-50 rounded-3xl p-8 border border-emerald-100 flex items-center gap-8 relative z-10">
                                     <div class="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg"><i data-lucide="clock" size="32"></i></div>
                                     <div>
@@ -727,24 +693,12 @@
                         </div>
                     </div>
 
-                    <!-- Footnotes -->
                     <div class="mt-8 pt-8 border-t border-slate-200 text-xs text-slate-400 space-y-2">
                         <p class="font-bold uppercase tracking-wider mb-2 text-slate-500">Methodology & References</p>
-                        <p>
-                            <span class="font-bold text-slate-600">Cost of Quality:</span> 
-                            <a href="https://asq.org/quality-resources/cost-of-quality" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">ASQ Cost of Quality</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">1-10-100 Rule:</span> 
-                            <a href="https://aljamouss.com/en/details/149/What-is-the-1-10-100-Rule-#:~:text=%24100%3A%20Bad%20data%20may%20flow,To%20summarize" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">The 1-10-100 Rule</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">RFI Cost Analysis:</span> 
-                            <a href="https://www.constructionjunkie.com/blog/2015/9/7/the-cost-of-rfis-and-best-practices-for-construction-professionals#:~:text=The%20Navigant%20Construction%20Forum%20and,The%20group%20analyzed%20over%201%2C300" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Navigant Construction Forum (Construction Junkie)</a>
-                        </p>
-                        <p>
-                            <span class="font-bold text-slate-600">Delay Claims:</span> AACE International Recommended Practice No. 38R-06: "Documenting Evidence for Delay Claims."
-                        </p>
+                        <p><span class="font-bold text-slate-600">Cost of Quality:</span> <a href="https://asq.org/quality-resources/cost-of-quality" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">ASQ Cost of Quality</a></p>
+                        <p><span class="font-bold text-slate-600">1-10-100 Rule:</span> <a href="https://aljamouss.com/en/details/149/What-is-the-1-10-100-Rule-#:~:text=%24100%3A%20Bad%20data%20may%20flow,To%20summarize" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">The 1-10-100 Rule</a></p>
+                        <p><span class="font-bold text-slate-600">RFI Cost Analysis:</span> <a href="https://www.constructionjunkie.com/blog/2015/9/7/the-cost-of-rfis-and-best-practices-for-construction-professionals#:~:text=The%20Navigant%20Construction%20Forum%20and,The%20group%20analyzed%20over%201%2C300" target="_blank" class="underline hover:text-[#D95D2A] transition-colors">Navigant Construction Forum (Construction Junkie)</a></p>
+                        <p><span class="font-bold text-slate-600">Delay Claims:</span> AACE International Recommended Practice No. 38R-06: "Documenting Evidence for Delay Claims."</p>
                     </div>
                 </div>
             </section>
@@ -860,7 +814,6 @@
             <section id="content-bidder" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="lg:col-span-4 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow">
-                        <!-- Changed icon text color to Orange -->
                         <h2 class="text-lg font-bold mb-6 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-[#D95D2A]"></i> Bidder Variables</h2>
                         <div class="space-y-8">
                             
@@ -1055,7 +1008,7 @@
                     </label>
                 </div>
 
-                <!-- Investment Inputs -->
+                <!-- Investment Inputs (New) -->
                 <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow max-w-4xl mx-auto">
                     <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4"><span class="company-name-text">JHL Constructors</span> Investment</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1083,6 +1036,7 @@
                     </div>
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
                         <p class="text-xs font-bold text-gray-400 uppercase mb-2">Year 1 ROI</p>
+                        <!-- Changed text color to emerald (green) -->
                         <h3 id="summary-roi-y1" class="text-4xl font-black text-emerald-600">0%</h3>
                     </div>
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 card-shadow text-center">
@@ -1155,6 +1109,7 @@
             calculate();
         }
 
+        // Generic currency formatter for investment inputs (no syncing)
         function formatCurrencyInput(input) {
             let rawValue = input.value.replace(/\D/g, '');
             if (rawValue === '') {
@@ -1167,6 +1122,7 @@
             renderChart();
         }
 
+        // Update company name text throughout dashboard
         function updateCompanyName(name) {
             const companyName = name.trim() || 'The Company';
             document.querySelectorAll('.company-name-text').forEach(el => {
@@ -1174,6 +1130,7 @@
             });
         }
 
+        // Handle logo URL input
         function updateLogoFromUrl(input) {
             const url = input.value.trim();
             const img = document.getElementById('company-logo-img');
@@ -1194,6 +1151,7 @@
             }
         }
 
+        // NEW: Sync function for shared inputs (GC & Duration)
         function syncInputs(sourceId, targetId) {
             const el = document.getElementById(sourceId);
             if (!el) return;
@@ -1202,9 +1160,11 @@
             const base = document.getElementById(targetId);
             if(base) base.value = val;
             
-            // Fixed Naming: Sync with RFI Tab (Tab 4) input-rfi-gc-pct
-            const rfi = document.getElementById(targetId.replace('input-gc-pct', 'input-rfi-gc-pct'));
-             if(rfi) rfi.value = val;
+            const rfi = document.getElementById(targetId.replace('input-', 'input-rfi-'));
+            if(rfi) rfi.value = val;
+            
+            const rfiPct = document.getElementById(targetId.replace('input-gc-pct', 'input-rfi-gc-pct'));
+             if(rfiPct) rfiPct.value = val;
              
              // Also handle Duration Sync
              const rfiDur = document.getElementById(targetId.replace('input-duration', 'input-rfi-duration'));
@@ -1214,17 +1174,21 @@
         }
 
         function calculate() {
+            // Helper to safely get value from an input ID, defaulting to 0 if missing or empty
             const getVal = (id) => {
                 const el = document.getElementById(id);
                 if (!el) return 0;
+                // Clean commas if present
                 return parseFloat(el.value.replace(/,/g, '')) || 0;
             };
 
+            // Safe volume retrieval (handles commas and missing elements)
             let vol = 0;
             const volInput1 = document.getElementById('input-annual-volume');
             if (volInput1) {
                 vol = parseFloat(volInput1.value.replace(/,/g, '')) || 0;
             } else {
+                // Fallback scan
                 const ids = ['input-annual-volume-rework', 'input-annual-volume-schedule', 'input-annual-volume-rfi', 'input-annual-volume-coord', 'input-annual-volume-bidder'];
                 for (let id of ids) {
                     const el = document.getElementById(id);
@@ -1249,6 +1213,7 @@
             const safetyLiability = incidents * costPerRecordable;
             state.safety = safetyLiability * safetyRed;
 
+            // UI Updates - Safety
             if (document.getElementById('label-sga-pct')) document.getElementById('label-sga-pct').innerText = Math.round(sgaPct * 100) + '%';
             if (document.getElementById('label-labor-pct')) document.getElementById('label-labor-pct').innerText = Math.round(lPct * 100) + '%';
             if (document.getElementById('label-reduction-pct')) document.getElementById('label-reduction-pct').innerText = Math.round(safetyRed * 100) + '%';
@@ -1299,15 +1264,19 @@
             const schedRed = getVal('input-sched-red') / 100;
 
             const totalGcCost = vol * gcPct;
-            const durationDays = durationMo * 30;
+            const durationDays = durationMo * 30; // Approx
             const dailyBurn = durationDays > 0 ? totalGcCost / durationDays : 0;
             
             const overrunDays = durationDays * slippagePct;
             const overrunCost = overrunDays * dailyBurn;
             
-            const totalScheduleExposure = overrunCost; 
+            // Removed Claim Risk Calculation entirely per request
+            // const claimExposure = vol * 0.02 * 0.257; 
+            
+            const totalScheduleExposure = overrunCost; // Was overrunCost + claimExposure
             state.schedule = totalScheduleExposure * schedRed;
 
+            // Schedule UI
             if (document.getElementById('val-gc-pct')) document.getElementById('val-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
             if (document.getElementById('val-duration')) document.getElementById('val-duration').innerText = durationMo;
             if (document.getElementById('val-slippage')) document.getElementById('val-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
@@ -1317,41 +1286,57 @@
             if (document.getElementById('display-burn-rate')) document.getElementById('display-burn-rate').innerText = toCurrency(dailyBurn);
             if (document.getElementById('display-overrun-cost')) document.getElementById('display-overrun-cost').innerText = toCurrency(totalScheduleExposure);
 
+            // Narrative Update for Schedule
             if (document.getElementById('narrative-sched-vol')) document.getElementById('narrative-sched-vol').innerText = toShort(vol);
             if (document.getElementById('narrative-sched-gc-pct')) document.getElementById('narrative-sched-gc-pct').innerText = (gcPct * 100).toFixed(1) + '%';
             if (document.getElementById('narrative-sched-daily-burn')) document.getElementById('narrative-sched-daily-burn').innerText = toCurrency(dailyBurn);
             if (document.getElementById('narrative-sched-duration')) document.getElementById('narrative-sched-duration').innerText = durationMo;
             if (document.getElementById('narrative-sched-slippage')) document.getElementById('narrative-sched-slippage').innerText = (slippagePct * 100).toFixed(0) + '%';
-            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost);
+            if (document.getElementById('narrative-sched-overrun')) document.getElementById('narrative-sched-overrun').innerText = toCurrency(overrunCost); // Narrative focused on direct overrun
             if (document.getElementById('narrative-sched-red')) document.getElementById('narrative-sched-red').innerText = (schedRed * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-sched-savings')) document.getElementById('narrative-sched-savings').innerText = toCurrency(state.schedule);
 
-            // --- RFI Logic ---
-            const rfiBaseFreq = getVal('input-rfi-base-freq');
+            // --- RFI Logic (UPDATED) ---
+            // Inputs from Tab 4 (some synced from Tab 3 logic)
+            // Note: gcPct and durationMo are already derived from getVal which pulls from the DOM.
+            // Since we sync the inputs visually, the values should be consistent regardless of which tab drove them.
+            
+            const rfiBaseFreq = getVal('input-rfi-base-freq'); // NEW exposed input
             const rfiCriticalPct = getVal('input-rfi-critical') / 100;
             const rfiErrorPct = getVal('input-rfi-error') / 100;
             const rfiMult = getVal('input-rfi-mult');
             const rfiImprove = getVal('input-rfi-improve') / 100;
 
+            // Baseline RFI Count
             const baseRFIs = (vol / 1000000) * rfiBaseFreq;
+            
+            // Critical Field RFIs = Total * %Error * %Critical
             const criticalFieldRFIs = baseRFIs * rfiErrorPct * rfiCriticalPct;
+            
+            // Cost per Impact = Daily Burn * Multiplier
             const costPerImpact = dailyBurn * rfiMult;
+            
+            // Total Exposure and Savings
             const totalRFIExposure = criticalFieldRFIs * costPerImpact;
             state.rfi = totalRFIExposure * rfiImprove;
 
-            // Updated IDs for RFI Logic to match HTML
+            // UI Updates - RFI Inputs & Syncs
+            // We need to update labels for the Tab 4 versions of GC/Duration
             if (document.getElementById('val-rfi-gc')) document.getElementById('val-rfi-gc').innerText = (gcPct * 100).toFixed(1) + '%';
             if (document.getElementById('val-rfi-duration')) document.getElementById('val-rfi-duration').innerText = durationMo;
             if (document.getElementById('val-rfi-base-freq')) document.getElementById('val-rfi-base-freq').innerText = rfiBaseFreq;
+            
             if (document.getElementById('val-rfi-critical')) document.getElementById('val-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-rfi-error')) document.getElementById('val-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-rfi-mult')) document.getElementById('val-rfi-mult').innerText = rfiMult + 'x';
             if (document.getElementById('val-rfi-improve')) document.getElementById('val-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
 
+            // UI Updates - Cards
             if (document.getElementById('display-rfi-savings')) document.getElementById('display-rfi-savings').innerText = toCurrency(state.rfi);
             if (document.getElementById('display-rfi-count')) document.getElementById('display-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
             if (document.getElementById('display-rfi-burden')) document.getElementById('display-rfi-burden').innerText = toCurrency(costPerImpact);
 
+            // UI Updates - Narrative
             if (document.getElementById('narrative-rfi-error')) document.getElementById('narrative-rfi-error').innerText = (rfiErrorPct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-rfi-critical')) document.getElementById('narrative-rfi-critical').innerText = (rfiCriticalPct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-rfi-count')) document.getElementById('narrative-rfi-count').innerText = Math.round(criticalFieldRFIs).toLocaleString();
@@ -1361,25 +1346,31 @@
             if (document.getElementById('narrative-rfi-improve')) document.getElementById('narrative-rfi-improve').innerText = (rfiImprove * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-rfi-savings')) document.getElementById('narrative-rfi-savings').innerText = toCurrency(state.rfi);
 
-            // --- Coordination Logic (Fixed: Removed Dead Code) ---
-            const coordImprove = getVal('input-coord-improve') / 100; 
+            // --- Coordination Logic (UPDATED - Simplified) ---
+            const coordImprove = getVal('input-coord-improve') / 100; // VDC Savings %
 
+            // Simple Top-Down Calculation: Volume * Improvement %
             state.coordination = vol * coordImprove;
 
+            // UI Updates - Coordination
             if (document.getElementById('val-coord-improve')) document.getElementById('val-coord-improve').innerText = (coordImprove * 100).toFixed(2) + '%';
 
             if (document.getElementById('display-coord-savings')) document.getElementById('display-coord-savings').innerText = toCurrency(state.coordination);
+            
+            // Updated secondary metrics
             if (document.getElementById('display-coord-improve-pct')) document.getElementById('display-coord-improve-pct').innerText = (coordImprove * 100).toFixed(2) + '%';
             if (document.getElementById('display-coord-val')) document.getElementById('display-coord-val').innerText = toCurrency(state.coordination);
 
+            // Updated Narrative
             if (document.getElementById('narrative-coord-vol')) document.getElementById('narrative-coord-vol').innerText = toCurrency(vol);
             if (document.getElementById('narrative-coord-improve')) document.getElementById('narrative-coord-improve').innerText = (coordImprove * 100).toFixed(2) + '%';
             if (document.getElementById('narrative-coord-savings')) document.getElementById('narrative-coord-savings').innerText = toCurrency(state.coordination);
 
-            // --- Bidder Selection Logic (Fixed: Liability Calculation) ---
+            // --- Bidder Selection Logic ---
             const bidLowPct = getVal('input-bid-low') / 100;
             const bidDisputePct = getVal('input-bid-dispute') / 100;
             const bidInitialPct = getVal('input-bid-initial') / 100;
+            // Removed bidSettlePct
             const bidRecoverPct = getVal('input-bid-recover') / 100;
             const bidImprovePct = getVal('input-bid-improve') / 100;
 
@@ -1387,11 +1378,12 @@
             const disputeVol = volAtRisk * bidDisputePct;
             const totalDisputeValue = disputeVol * bidInitialPct;
             
-            // FIXED: Settlement Liability = Dispute Amount * (1 - Recovery Rate)
+            // UPDATED CALCULATION: Liability = Dispute Value * (1 - Recovery Rate)
             const settlementLiability = totalDisputeValue * (1 - bidRecoverPct);
             
             state.bidder = settlementLiability * bidImprovePct;
 
+            // UI Updates - Bidder
             if (document.getElementById('val-bid-low')) document.getElementById('val-bid-low').innerText = (bidLowPct * 100).toFixed(0) + '%';
             if (document.getElementById('val-bid-dispute')) document.getElementById('val-bid-dispute').innerText = (bidDisputePct * 100).toFixed(0) + '%';
             if (document.getElementById('val-bid-initial')) document.getElementById('val-bid-initial').innerText = (bidInitialPct * 100).toFixed(1) + '%';
@@ -1410,7 +1402,9 @@
             if (document.getElementById('narrative-bid-improve')) document.getElementById('narrative-bid-improve').innerText = (bidImprovePct * 100).toFixed(0) + '%';
             if (document.getElementById('narrative-bid-savings')) document.getElementById('narrative-bid-savings').innerText = toCurrency(state.bidder);
 
+
             // --- Global Summary ---
+            // Check toggles (if they exist, default to true)
             const sTog = document.getElementById('toggle-safety');
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
@@ -1429,6 +1423,7 @@
             const savingsY2 = (sOn ? state.safety * 1.1 : 0) + (rOn ? state.rework * 1.1 : 0) + (scOn ? state.schedule * 1.1 : 0) + (rfOn ? state.rfi * 1.1 : 0) + (cOn ? state.coordination * 1.1 : 0) + (bOn ? state.bidder * 1.1 : 0);
             const savingsY3 = (sOn ? state.safety * 1.25 : 0) + (rOn ? state.rework * 1.25 : 0) + (scOn ? state.schedule * 1.25 : 0) + (rfOn ? state.rfi * 1.25 : 0) + (cOn ? state.coordination * 1.25 : 0) + (bOn ? state.bidder * 1.25 : 0);
 
+            // Investments
             const investAnnual = getVal('input-invest-annual');
             const investOneTime = getVal('input-invest-onetime');
             
@@ -1436,13 +1431,15 @@
             const costY2 = investAnnual;
             const costY3 = investAnnual;
 
+            // Calculate ROI % = ((Return - Cost) / Cost) * 100
+            // Guard against divide by zero
             const roiY1 = costY1 > 0 ? ((savingsY1 - costY1) / costY1) * 100 : 0;
             const roiY2 = costY2 > 0 ? ((savingsY2 - costY2) / costY2) * 100 : 0;
             const roiY3 = costY3 > 0 ? ((savingsY3 - costY3) / costY3) * 100 : 0;
 
             state.roi = [roiY1, roiY2, roiY3];
 
-            const y1 = savingsY1;
+            const y1 = savingsY1; // For display on card
             
             if (document.getElementById('summary-total-savings')) document.getElementById('summary-total-savings').innerText = toCurrency(y1);
             if (document.getElementById('summary-roi-y1')) document.getElementById('summary-roi-y1').innerText = roiY1.toFixed(0) + '%';
@@ -1451,11 +1448,12 @@
 
         function renderChart() {
             const canvas = document.getElementById('roiChart');
-            if (!canvas) return; 
+            if (!canvas) return; // Guard clause
             
             const ctx = canvas.getContext('2d');
             if (roiChart) roiChart.destroy();
 
+            // Check toggles
             const sTog = document.getElementById('toggle-safety');
             const rTog = document.getElementById('toggle-rework');
             const scTog = document.getElementById('toggle-schedule');
@@ -1470,8 +1468,11 @@
             const cOn = cTog ? cTog.checked : true;
             const bOn = bTog ? bTog.checked : true;
 
+            // Prepare datasets conditionally
             const datasets = [];
             
+            // ROI Line (Right Axis) - Added First so it renders on top if using 'order' property, 
+            // but chart.js renders datasets in order. Lines usually render on top of bars automatically if mixed.
             datasets.push({
                 type: 'line',
                 label: 'ROI %',
@@ -1483,10 +1484,11 @@
                 pointBorderWidth: 2,
                 pointRadius: 6,
                 yAxisID: 'y1',
-                order: 0
+                order: 0 // Render on top
             });
 
             if (sOn) {
+                // Safety: Orange
                 datasets.push({ 
                     label: 'Incident Reduction', 
                     data: [state.safety, state.safety * 1.1, state.safety * 1.25], 
@@ -1497,6 +1499,7 @@
                 });
             }
             if (rOn) {
+                // Rework: Black
                 datasets.push({ 
                     label: 'Rework Reduction', 
                     data: [state.rework, state.rework * 1.1, state.rework * 1.25], 
@@ -1507,6 +1510,7 @@
                 });
             }
             if (scOn) {
+                // Schedule: Tan
                 datasets.push({ 
                     label: 'GC Overrun Reduction', 
                     data: [state.schedule, state.schedule * 1.1, state.schedule * 1.25], 
@@ -1517,6 +1521,7 @@
                 });
             }
             if (rfOn) {
+                // RFI: #8d6e5b
                 datasets.push({ 
                     label: 'RFI Response Reduction', 
                     data: [state.rfi, state.rfi * 1.1, state.rfi * 1.25], 
@@ -1527,6 +1532,7 @@
                 });
             }
             if (cOn) {
+                // Coordination: #cec4a1
                 datasets.push({ 
                     label: 'Coordination Improvement', 
                     data: [state.coordination, state.coordination * 1.1, state.coordination * 1.25], 
@@ -1537,6 +1543,7 @@
                 });
             }
             if (bOn) {
+                // Bidder: #566578
                 datasets.push({ 
                     label: 'Bidder Selection Improvement', 
                     data: [state.bidder, state.bidder * 1.1, state.bidder * 1.25], 
@@ -1575,7 +1582,7 @@
                             display: true,
                             position: 'right',
                             grid: {
-                                drawOnChartArea: false, 
+                                drawOnChartArea: false, // only want the grid lines for one axis to show up
                             },
                             ticks: { callback: (v) => v.toFixed(0) + '%' },
                             title: { display: true, text: 'Return on Investment (%)' }

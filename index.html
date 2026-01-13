@@ -341,18 +341,20 @@
                                 </div>
                                 <p class="text-xs text-slate-400 mb-3">12% average. Ranges from 2% to 20%</p>
                                 <input type="range" id="input-rw-pct" min="0.5" max="15" step="0.1" value="2.5">
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable Rework</label>
+                                <span id="val-rw-non" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
                             </div>
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Estimated Nonrecoverable</label>
-                                    <span id="val-rw-non" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">70%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">70% average</p>
-                                <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
-                            </div>
-                            <div class="pt-4 border-t">
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
+                            <p class="text-xs text-slate-400 mb-3">70% average</p>
+                            <input type="range" id="input-rw-non" min="50" max="100" step="5" value="70">
+                        </div>
+                        
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-emerald-700">Rework Reduction Target</label>
                                     <span id="val-rw-red" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">5.0%</span>
                                 </div>
                                 <input type="range" id="input-rw-red" min="1" max="25" step="1" value="5.0" class="slider-emerald">
@@ -458,18 +460,19 @@
                                 </div>
                                 <!-- Fixed ID sync here -->
                                 <input type="range" id="input-duration" min="6" max="36" step="1" value="12" oninput="syncInputs('input-duration', 'input-rfi-duration')">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
+                                <!-- Bubble Style -->
+                                <span id="val-slippage" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">15%</span>
                             </div>
-                            <div>
-                                <div class="flex justify-between items-end mb-1">
-                                    <label class="text-sm font-semibold text-gray-600">Avg Schedule Slippage</label>
-                                    <!-- Bubble Style -->
-                                    <span id="val-slippage" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">15%</span>
-                                </div>
-                                <p class="text-xs text-slate-400 mb-3">72% of projects are delayed 38% on average</p>
-                                <input type="range" id="input-slippage" min="0" max="50" step="5" value="15">
-                            </div>
-                            <div class="pt-4 border-t">
-                                <div class="flex justify-between items-end mb-2">
+                            <p class="text-xs text-slate-400 mb-3">72% of projects are delayed 38% on average</p>
+                            <!-- Updated step to 1 -->
+                            <input type="range" id="input-slippage" min="0" max="50" step="1" value="15">
+                        </div>
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-end mb-2">
                                     <label class="text-sm font-semibold text-emerald-700">Delay Reduction Target</label>
                                     <span id="val-sched-red" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">10%</span>
                                 </div>
@@ -590,14 +593,14 @@
                                 <p class="text-xs text-slate-400 mb-3">Per $1M Volume (Industry Avg: 10)</p>
                                 <input type="range" id="input-rfi-base-freq" min="5" max="30" step="1" value="10">
                             </div>
-
+                            <!-- % of Critical Path RFIs -->
                             <div>
                                 <div class="flex justify-between items-end mb-1">
                                     <label class="text-sm font-semibold text-gray-600">% of Critical Path RFIs</label>
                                     <!-- Changed text color to Orange -->
                                     <span id="val-rfi-critical" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">20%</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mb-3">Industry Average: 15% to 25%</p>
+                                <p class="text-xs text-slate-400 mb-3">Industry Average Range: 15% to 25%</p>
                                 <input type="range" id="input-rfi-critical" min="5" max="30" step="1" value="20">
                             </div>
 
@@ -725,7 +728,7 @@
                                     <label class="text-sm font-semibold text-emerald-700">Clash Detection Savings %</label>
                                     <span id="val-coord-improve" class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-extrabold">5.00%</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mb-3">up to 10%</p>
+                                <p class="text-xs text-slate-400 mb-3">Up to 10%</p>
                                 <input type="range" id="input-coord-improve" min="0" max="10" step="0.25" value="5" class="slider-emerald">
                             </div>
 
@@ -868,7 +871,7 @@
                                     <!-- Bubble Style -->
                                     <span id="val-bid-recover" class="px-3 py-1 bg-[#EAE3D9] text-[#D95D2A] rounded-full text-xs font-extrabold">50%</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mb-3">Average 50% of Claimed Amount</p>
+                                <p class="text-xs text-slate-400 mb-3">Average 50% of Initial Dispute Value</p>
                                 <input type="range" id="input-bid-recover" min="0" max="100" step="5" value="50">
                             </div>
 
